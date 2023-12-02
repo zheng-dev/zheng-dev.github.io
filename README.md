@@ -7,3 +7,5 @@
 <!---
 haha 有意思
 --->
+记录git的国内阿里镜像
+https://registry.npmmirror.com/binary.html?path=git-for-windows/v2.43.0.windows.1/
