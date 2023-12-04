@@ -14,14 +14,14 @@
       $.ajax({
         type: "GET",
         url: "README.md",
-        data: { },
-        dataType: "JSON",
+        dataType: "html",
         success: function(result) {
-        console.log(result);
+        // alert('ttt');
+        document.getElementById("md-view").innerHTML = marked(result)
         }
       });
       }
-    document.getElementById("md-view").innerHTML = marked("# abcd # c")
+    // document.getElementById("md-view").innerHTML = marked("# abcd # c")
 </script>
 
 </body>
