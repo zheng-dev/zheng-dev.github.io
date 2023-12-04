@@ -1,4 +1,16 @@
 <html lang="cn">
-<head><title>en</title></head>
-<body>ddd</body>
+<head>
+    <title>en</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/marked/2.0.3/marked.js"></script>
+
+</head>
+<body>
+<p>ddd</p>
+<div id="md-view"></div>
+
+<script>
+    document.getElementById("md-view").innerHTML = marked("# abcd # c")
+</script>
+
+</body>
 </html>
