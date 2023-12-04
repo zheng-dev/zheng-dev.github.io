@@ -1,14 +1,26 @@
 <html lang="cn">
 <head>
     <title>en</title>
+<!--  https://www.bootcdn.cn/jquery/  -->
     <script src="https://cdn.bootcdn.net/ajax/libs/marked/2.0.3/marked.js"></script>
-
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
 <p>ddd</p>
 <div id="md-view"></div>
-
+<button onclick="submit()">tttttt</button>
 <script>
+    function submit() {
+      $.ajax({
+        type: "GET",
+        url: "README.md",
+        data: { },
+        dataType: "JSON",
+        success: function(result) {
+        console.log(result);
+        }
+      });
+      }
     document.getElementById("md-view").innerHTML = marked("# abcd # c")
 </script>
 
