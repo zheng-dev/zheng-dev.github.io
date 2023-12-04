@@ -1,28 +1,40 @@
 <html lang="cn">
+
 <head>
-    <title>en</title>
-<!--  https://www.bootcdn.cn/jquery/  -->
-    <script src="https://cdn.bootcdn.net/ajax/libs/marked/2.0.3/marked.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-</head>
-<body>
-<p>ddd</p>
-<div id="md-view"></div>
-<button onclick="submit()">tttttt</button>
-<script>
-    function submit() {
+  <title>en</title>
+  <!--  https://www.bootcdn.cn/jquery/  -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/marked/2.0.3/marked.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    function ok() {
+      //当前锚点
+      let mdFile = "README.md"
+      let urls=  window.location.href.split('#');
+      if(urls.length>1)mdFile=urls[1];
+
+      console.log('ddd',urls,mdFile);
       $.ajax({
         type: "GET",
-        url: "README.md",
+        url: mdFile,
         dataType: "html",
-        success: function(result) {
-        // alert('ttt');
-        document.getElementById("md-view").innerHTML = marked(result)
+        success: function (result) {
+          document.getElementById("md-view").innerHTML = marked(result)
+        },
+        error:function(a,b){
+          alert(b);
         }
       });
-      }
-    // document.getElementById("md-view").innerHTML = marked("# abcd # c")
-</script>
+    }
+    window.onload = function(){ 
+      ok();
+  }
+  </script>
+
+</head>
+
+<body onload="ok()">
+  <div id="md-view"></div>
 
 </body>
+
 </html>
