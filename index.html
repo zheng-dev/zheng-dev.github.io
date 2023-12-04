@@ -9,7 +9,7 @@
     function ok() {
       //当前锚点
       let mdFile = "README.md"
-      let urls=  window.location.href.split('#');
+      let urls=  window.location.href.split('?');
       if(urls.length>1)mdFile=urls[1];
 
       console.log('ddd',urls,mdFile);

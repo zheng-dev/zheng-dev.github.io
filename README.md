@@ -14,7 +14,7 @@
 >kkkk
 >sss
 
-[子目录](/#a.md "test")
+[子目录](/?a.md "test")
 
 <!---
 haha 有意思
