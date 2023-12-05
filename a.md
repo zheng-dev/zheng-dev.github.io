@@ -9,16 +9,18 @@
 >kkkk
 >sss
 
-| Column 1 | Column 2 | Column 3 |
+| 维度 | `window.onload` | `$(document).ready()` |
 |:--------| :---------:|--------:|
-| centered 文本居左 | right-aligned 文本居中 |right-aligned 文本居右|
-| 2222 |222 |3333|
+| 执行时机 | 必须等网页全部载完毕（包括图片等），然后才执行 |只需要等网页中的DOM结构加载完毕，就执行|
+| 执行次数 |只能执行一次，重复执行会覆盖之前的 |可以执行多次，不会覆盖|
+| 简写方案 | 无 | `$(function(){});` |
+
 
 - 1
 - 2
 - 3
 
 # 开源协议的选择
-[博文](http://www.ruanyifeng.com/blog/2011/05/how_to_choose_free_software_licenses.html "来源")
+[参考博文](http://www.ruanyifeng.com/blog/2011/05/how_to_choose_free_software_licenses.html "来源")
 
 ![参考图](http://www.ruanyifeng.com/blogimg/asset/201105/free_software_licenses.png "引用图")
