@@ -26,7 +26,7 @@
 ![参考图](http://www.ruanyifeng.com/blogimg/asset/201105/free_software_licenses.png "引用图")
 
 ## 创建ssh
-```markdown
+```bash
 ssh-keygen -t ed25519 -C "Gitee SSH Key"
 type C:\Users\xxx\.ssh\id_ed25519.pub
 
@@ -34,4 +34,8 @@ git@github.com:zheng-dev/zheng-dev.github.io.git
 
 git config --global user.name "xxx"
 git config --global user.email xx@x.com
+
+#cdn
+https://az764295.vo.msecnd.net/stable/1a5daa3a0231a0fbba4f14db7ec463cf99d7768e/VSCodeUserSetup-x64-1.84.2.exe
+vscode.cdn.azure.cn/stable/1a5daa3a0231a0fbba4f14db7ec463cf99d7768e/VSCodeUserSetup-x64-1.84.2.exe
 ```
