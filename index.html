@@ -6,7 +6,8 @@
   <script src="https://cdn.bootcdn.net/ajax/libs/marked/2.0.3/marked.js"></script>
   <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script type="text/javascript">
-    function ok() {
+
+    window.onload = function () {
       //当前锚点
       let mdFile = "README.md"
       let urls = window.location.href.split('?');
@@ -26,10 +27,7 @@
           alert(b);
         }
       });
-    }
-    window.onload = function () {
-      ok();
-    }
+    };
   </script>
   <style>
     #mask {
@@ -49,10 +47,24 @@
       margin: 100px auto;
       color: brown;
     }
+
+
+    #md-view table {
+      /*border: 1px solid green;*/
+      border-right: 1px solid green;
+      border-bottom: 1px solid green;
+    }
+
+    #md-view table td,
+    th {
+      /*border:  1px solid red;*/
+      border-left: 1px solid red;
+      border-top: 1px solid red;
+    }
   </style>
 </head>
 
-<body onload="ok()">
+<body>
   <div id="mask">
     <div>加载中</div>
   </div>
