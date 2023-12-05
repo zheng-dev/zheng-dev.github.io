@@ -17,3 +17,8 @@
 - 1
 - 2
 - 3
+
+# 开源协议的选择
+[博文](http://www.ruanyifeng.com/blog/2011/05/how_to_choose_free_software_licenses.html "来源")
+
+![参考图](http://www.ruanyifeng.com/blogimg/asset/201105/free_software_licenses.png "引用图")
