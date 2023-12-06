@@ -1,5 +1,8 @@
 {
     "liveServer.settings.AdvanceCustomBrowserCmdLine": "",
     "liveServer.settings.ChromeDebuggingAttachment": false,
-    "liveServer.settings.CustomBrowser": "microsoft-edge"
+    "liveServer.settings.CustomBrowser": "microsoft-edge",
+    
+    "editor.guides.bracketPairs":"active",  // 控制是否启用。active: 仅为活动括号对启用水平参考线
+    "editor.guides.bracketPairsHorizontal": "active",   // 控制是否启用水平括号对指南。active: 仅为活动括号对启用水平参考线
 }
