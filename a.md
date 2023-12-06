@@ -1,13 +1,7 @@
-# 介绍
-- 👋 Hi, I’m @zheng-dev
-
-### 测试1
+## 测试1
 **测试**一下效果
-### 测试2
->- kkskdjf
->- kkkk
->kkkk
->sss
+## 测试2
+
 
 | 维度 | `window.onload` | `$(document).ready()` |
 |:--------| :---------:|--------:|
@@ -16,9 +10,7 @@
 | 简写方案 | 无 | `$(function(){});` |
 
 
-- 1
-- 2
-- 3
+
 
 # 开源协议的选择
 [参考博文](http://www.ruanyifeng.com/blog/2011/05/how_to_choose_free_software_licenses.html "来源")
@@ -38,4 +30,12 @@ git config --global user.email xx@x.com
 #cdn
 https://az764295.vo.msecnd.net/stable/1a5daa3a0231a0fbba4f14db7ec463cf99d7768e/VSCodeUserSetup-x64-1.84.2.exe
 vscode.cdn.azure.cn/stable/1a5daa3a0231a0fbba4f14db7ec463cf99d7768e/VSCodeUserSetup-x64-1.84.2.exe
+```
+
+## git同时向两个远端库上传
+```conf
+[remote "gitee"]
+	url = git@gitee.com:koo66/erlang_server.git
+	fetch = +refs/heads/*:refs/remotes/gitee/*
+	url = git@github.com:zzc16707826/my_all_test0.git
 ```
