@@ -33,7 +33,7 @@ vscode.cdn.azure.cn/stable/1a5daa3a0231a0fbba4f14db7ec463cf99d7768e/VSCodeUserSe
 ```
 
 ## git同时向两个远端库上传
-```conf
+```bash
 [remote "gitee"]
 	url = git@gitee.com:koo66/erlang_server.git
 	fetch = +refs/heads/*:refs/remotes/gitee/*

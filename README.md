@@ -8,7 +8,7 @@
 ## 笔记
 
 
-[测试markdown](/?a.md "test")
+[测试markdown](/a.md "test")
 
 ## url收藏
 [git工具的国内阿里镜像](https://registry.npmmirror.com/binary.html?path=git-for-windows/v2.43.0.windows.1/ "git软件")
