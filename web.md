@@ -1,7 +1,9 @@
-## 问题记录
+# web建站
+
+#### 问题记录
 如何等待**promise**执行完后再执行后续逻辑。比如有的api函数是返回的promise，但后续逻辑要等异步运行后的结果。
 
-## 网页加载完成时机
+#### 网页加载完成时机
 
 | 维度     |                `window.onload`                 |                   `$(document).ready()` |
 | :------- | :--------------------------------------------: | --------------------------------------: |
@@ -17,29 +19,30 @@
 
 ![参考图](http://www.ruanyifeng.com/blogimg/asset/201105/free_software_licenses.png "引用图")
 
-## 创建ssh
+# git相关
+
+#### git配置
 ```bash
-ssh-keygen -t ed25519 -C "Gitee SSH Key"
+#生成key
+ssh-keygen -t ed25519 -C "Git my SSH Key"
+#查看内容，上传到github
 type C:\Users\xxx\.ssh\id_ed25519.pub
 
 git@github.com:zheng-dev/zheng-dev.github.io.git
-
+#配置上传看到的名称
 git config --global user.name "xxx"
 git config --global user.email xx@x.com
 
-#cdn
-https://az764295.vo.msecnd.net/stable/1a5daa3a0231a0fbba4f14db7ec463cf99d7768e/VSCodeUserSetup-x64-1.84.2.exe
-vscode.cdn.azure.cn/stable/1a5daa3a0231a0fbba4f14db7ec463cf99d7768e/VSCodeUserSetup-x64-1.84.2.exe
 ```
 
-## git同时向两个远端库上传
+#### git同时向两个远端库上传
 ```editorconfig
 [remote "gitee"]
 	url = git@gitee.com:koo66/erlang_server.git
 	fetch = +refs/heads/*:refs/remotes/gitee/*
 	url = git@github.com:zzc16707826/my_all_test0.git
 ```
-
+# 技能
 ```mermaid
 graph TD
 eq("effector_queue")--"调用"-->eTxt1("【内容/包装】效果器")--"调用"-->eTxt2("内容效果器2")--"调用"-->eTxt3("内容效果器N")
