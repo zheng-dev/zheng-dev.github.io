@@ -1,6 +1,6 @@
 <!-- index.html -->
-
 <!DOCTYPE html>
+<html lang="en">
 <html>
 
 <head>
@@ -10,37 +10,35 @@
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/themes/vue.css" />
 
-  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-php.min.js"></script>
-
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.css">
-  <script src="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 </head>
 
 <body>
   <div id="app">Please wait...</div>
   <script>
-    var num = 0;
-    mermaid.initialize({ startOnLoad: false });
     window.$docsify = {
       el: '#app',
-      markdown: {
-        renderer: {
-          code: function (code, lang) {
-            if (lang === "mermaid") {
-              let a = mermaid.render('mermaid-svg-' + num++, code);
-              console.log(4, a);
-              return (
-                '<div class="mermaid">' + a + "</div>"
-              );
-            }
-            return this.origin.code.apply(this, arguments);
-          }
-        }
-      }
+      // loadSidebar: true,
+      loadNavbar: true,
+      mergeNavbar: true,
+      repo: "https://github.com/zheng-dev/my_all_test0"
     };
+
   </script>
+
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+
+
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-javascript.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-erlang.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-mermaid.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-editorconfig.min.js"></script>
+  <style>
+    * {
+      overflow: none;
+    }
+  </style>
 </body>
 
 </html>

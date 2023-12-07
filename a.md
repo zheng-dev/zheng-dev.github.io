@@ -1,7 +1,7 @@
-## 测试1
-**测试**一下效果
-## 测试2
+## 问题记录
+如何等待**promise**执行完后再执行后续逻辑。比如有的api函数是返回的promise，但后续逻辑要等异步运行后的结果。
 
+## 网页加载完成时机
 
 | 维度     |                `window.onload`                 |                   `$(document).ready()` |
 | :------- | :--------------------------------------------: | --------------------------------------: |
@@ -33,7 +33,7 @@ vscode.cdn.azure.cn/stable/1a5daa3a0231a0fbba4f14db7ec463cf99d7768e/VSCodeUserSe
 ```
 
 ## git同时向两个远端库上传
-```bash
+```editorconfig
 [remote "gitee"]
 	url = git@gitee.com:koo66/erlang_server.git
 	fetch = +refs/heads/*:refs/remotes/gitee/*
@@ -41,6 +41,6 @@ vscode.cdn.azure.cn/stable/1a5daa3a0231a0fbba4f14db7ec463cf99d7768e/VSCodeUserSe
 ```
 
 ```mermaid
-graph LR
+graph TD
 eq("effector_queue")--"调用"-->eTxt1("【内容/包装】效果器")--"调用"-->eTxt2("内容效果器2")--"调用"-->eTxt3("内容效果器N")
 ```
