@@ -1,4 +1,4 @@
-<!-- index.html -->
+<!-- index.html zheng6655@163.com -->
 <!DOCTYPE html>
 <html lang="en">
 <html>
@@ -11,7 +11,20 @@
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/themes/vue.css" />
   <link rel="stylesheet" href="//unpkg.com/mermaid/dist/mermaid.min.css" />
+  <style>
+    code {
+      overflow: auto;
+    }
 
+    .markdown-section pre>code.lang-mermaid {
+      display: none;
+    }
+
+    .markdown-section {
+      padding: 30px 5px 4px 5px;
+      max-width: 95%;
+    }
+  </style>
 </head>
 
 <body>
@@ -57,20 +70,6 @@
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-erlang.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-mermaid.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-editorconfig.min.js"></script>
-  <style>
-    code {
-      overflow: auto;
-    }
-
-    .markdown-section pre>code.lang-mermaid {
-      display: none;
-    }
-
-    .markdown-section {
-      padding: 30px 5px 4px 5px;
-      max-width: 95%;
-    }
-  </style>
 </body>
 
 </html>

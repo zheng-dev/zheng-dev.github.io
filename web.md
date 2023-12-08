@@ -21,17 +21,15 @@
       let ret2;
       let a1 = mer_html(code, num).then(ret => ret2 = ret);
       console.log('test0', a1, ret2);
-      console.log(333);
     }
 ```
-下面的打印顺序是
+的打印顺序如下：
 1. `test0 Promise {<pending>} undefined`
-2. 333
-3. `test1 <svg ar...`
-4. `test2 <svg ar...`
+2. `test1 <svg ar...`
+3. `test2 <svg ar...`
 
 结论：
-`async`函数返回的是*Promise*对象，`await`只能在`async`的函数体中。所以在同步函数体中不能等函数api的结论。只能用回调方式。如果在下面的场景下，就是不行的。如有这样一个调用链a调用b，b调用c。但a和c都是第3方提供的函数。如果b是非async的函数，而c是async的函数，但b需要c的返回结果处理逻辑。那就是不行的。
+`async`函数返回的是*Promise*对象；`await`只能在`async`的函数体中，所以在同步函数体中不能*wait*函数的结果。如果在下面的场景下，就是不行的：如有这样一个调用链a调用b，b调用c。但a和c都是第3方提供的函数。如果b是 非`async`的函数，而c是`async`的函数，但b需要c的返回结果处理逻辑,那就是不行的。
 
 #### 网页加载完成时机
 
@@ -79,6 +77,6 @@ git config --global user.email xx@x.com
 ```
 # 技能
 ```mermaid
-graph TD
+graph LR
 eq("effector_queue")--"调用"-->eTxt1("【内容/包装】效果器")--"调用"-->eTxt2("内容效果器2")--"调用"-->eTxt3("内容效果器N")
 ```
