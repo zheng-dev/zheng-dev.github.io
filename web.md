@@ -1,7 +1,37 @@
 # web建站
 
 #### 问题记录
-如何等待**promise**执行完后再执行后续逻辑。比如有的api函数是返回的promise，但后续逻辑要等异步运行后的结果。
+
+
+#### *promise*的问题
+测试代码如下20231208
+```javascript
+    //异步函数
+    async function mer_html(code, num) {
+      let promiseRet = mermaid.render('mermaid-svg-' + num++, code);
+      let ret = await promiseRet.then(ret => {
+        console.log("test1", ret.svg)
+        return ret.svg;
+      });
+      console.log('test2', ret);
+      return ret;
+    }
+    //同步函数
+    function test(code, num) {
+      let ret2;
+      let a1 = mer_html(code, num).then(ret => ret2 = ret);
+      console.log('test0', a1, ret2);
+      console.log(333);
+    }
+```
+下面的打印顺序是
+1. `test0 Promise {<pending>} undefined`
+2. 333
+3. `test1 <svg ar...`
+4. `test2 <svg ar...`
+
+结论：
+`async`函数返回的是*Promise*对象，`await`只能在`async`的函数体中。所以在同步函数体中不能等函数api的结论。只能用回调方式。如果在下面的场景下，就是不行的。如有这样一个调用链a调用b，b调用c。但a和c都是第3方提供的函数。如果b是非async的函数，而c是async的函数，但b需要c的返回结果处理逻辑。那就是不行的。
 
 #### 网页加载完成时机
 
