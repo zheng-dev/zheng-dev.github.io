@@ -4,7 +4,7 @@
 
 
 #### *promise*的问题
-测试代码如下20231208
+###### 测试代码如下20231208
 ```javascript
     //异步函数
     async function mer_html(code, num) {
@@ -30,6 +30,55 @@
 
 结论：
 `async`函数返回的是*Promise*对象；`await`只能在`async`的函数体中，所以在同步函数体中不能*wait*函数的结果。如果在下面的场景下，就是不行的：如有这样一个调用链a调用b，b调用c。但a和c都是第3方提供的函数。如果b是 非`async`的函数，而c是`async`的函数，但b需要c的返回结果处理逻辑,那就是不行的。
+###### 关于浏览器dom、线程及EventLoop扩展
+渲染层的*DOM*为了避免多线程异步的复杂操作，所以设计**js是单线程**+**EventLoop**的模式。对于`async`函数都是进入了任务队列，在当前js栈执行完成后就去从队列取一个头任务执行。
+浏览器线程大体有：
+1. GUI渲染
+2. JS引擎：执行宏任务+微任务
+3. 事件触发
+4. 定时器触发
+5. http请求
+###### JS引擎+GUI流程
+```mermaid
+graph LR
+js("JS当前栈开始")-->js_end("JS当前栈结束")--"调用"-->que("【宏任务/微任务】任务队列")-->que_c{"队列空"}--"是"-->g("GUI渲染")
+que_c--"否"-->js
+
+style js fill:#f9c
+
+macro("宏任务")-->s1("script块")
+macro-->timeout("定时器")
+macro-->ajax("ajax")
+micro("微任务")-->pt("Pormise.Then")
+async("异步")-->macro
+async-->micro
+style async fill:#fc9,stroke:#333,stroke-width:2px
+
+```
+###### 浏览器runtime的Worker
+* 主进程
+```javascript
+//创建Worker,可以是独立js文档或一个html不认识的标签内容
+let worker = new Worker(workJsFileURI);
+//注册一个接收消息的函数
+worker.onmessage = function (e) {
+    var data = e.data;
+};
+//给Worker发送消息内容，可以是任务结构
+worker.postMessage({"k":333});
+```
+* *workJsFile*独立文件的内容
+```javascript
+//接收主进程发来的消息数据
+self.onmessage = function(msg) {    
+    // todo 处理逻辑
+    //构造返回的数据
+    var workerResult = {};
+    //用消息的形式发送给主进程
+    postMessage(workerResult);
+}
+```
+这种有些像erlang的进程消息方式。只是js主进程鉴于浏览器是单线程的，所以只能注册回调func，不能支持像erlang的`receive`阻塞同步等消息回来的方案。
 
 #### 网页加载完成时机
 
@@ -75,8 +124,4 @@ git config --global user.email xx@x.com
 	fetch = +refs/heads/*:refs/remotes/gitee/*
 	url = git@github.com:zzc16707826/my_all_test0.git
 ```
-# 技能
-```mermaid
-graph LR
-eq("effector_queue")--"调用"-->eTxt1("【内容/包装】效果器")--"调用"-->eTxt2("内容效果器2")--"调用"-->eTxt3("内容效果器N")
-```
+
