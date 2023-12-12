@@ -57,6 +57,8 @@ style async fill:#fc9,stroke:#333,stroke-width:2px
 ```
 ###### 浏览器runtime的Worker
 * 主进程
+
+
 ```javascript
 //创建Worker,可以是独立js文档或一个html不认识的标签内容
 let worker = new Worker(workJsFileURI);
@@ -67,7 +69,10 @@ worker.onmessage = function (e) {
 //给Worker发送消息内容，可以是任务结构
 worker.postMessage({"k":333});
 ```
+
 * *workJsFile*独立文件的内容
+
+
 ```javascript
 //接收主进程发来的消息数据
 self.onmessage = function(msg) {    
