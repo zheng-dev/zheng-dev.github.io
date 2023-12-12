@@ -39,20 +39,21 @@
 4. 定时器触发
 5. http请求
 ###### JS引擎+GUI流程
+
 ```mermaid
 graph LR
 js("JS当前栈开始")-->js_end("JS当前栈结束")--"调用"-->que("【宏任务/微任务】任务队列")-->que_c{"队列空"}--"是"-->g("GUI渲染")
 que_c--"否"-->js
+```
 
-style js fill:#f9c
-
+```mermaid
+graph TD
 macro("宏任务")-->s1("script块")
 macro-->timeout("定时器")
 macro-->ajax("ajax")
 micro("微任务")-->pt("Pormise.Then")
 async("异步")-->macro
 async-->micro
-style async fill:#fc9,stroke:#333,stroke-width:2px
 
 ```
 ###### 浏览器runtime的Worker
