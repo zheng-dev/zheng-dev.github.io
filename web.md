@@ -85,6 +85,8 @@ self.onmessage = function(msg) {
 }
 ```
 这种有些像erlang的进程消息方式。只是js主进程鉴于浏览器是单线程的，所以只能注册回调func，不能支持像erlang的`receive`阻塞同步等消息回来的方案。
+[firefox参考文档](https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API/Microtask_guide "文档")
+
 
 #### 网页加载完成时机
 
