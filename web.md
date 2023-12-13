@@ -46,6 +46,7 @@ js("JS当前栈开始")-->js_end("JS当前栈结束")--"调用"-->que("【宏任
 que_c--"否"-->js
 ```
 
+###### js异步任务分类
 ```mermaid
 graph TD
 macro("宏任务")-->s1("script块")
