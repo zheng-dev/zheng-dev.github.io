@@ -14,8 +14,9 @@ z-)u:战场完整状态数据
 z->>-f: 返回进程Pid
 z--)u:中断1
 
-f->>+f:进行
-f-x-z:a
+activate  f
+f->>-f:进行
+f-xz:a
 
 
 ```
