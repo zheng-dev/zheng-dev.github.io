@@ -13,6 +13,7 @@
 
     let voices = window.speechSynthesis.getVoices(); // 获取语言包
     utterance.voice = voices[108];//Microsoft Sonia Online (Natural) - English (United Kingdom)
+
     let t, vid;
 
     //朗读
@@ -20,6 +21,25 @@
         if (vid !== voiceId) {
             vid = voiceId;
             let voices = window.speechSynthesis.getVoices(); // 获取语言包
+
+
+            voices.forEach(element => {
+                if (element.name.indexOf("Sonia ") > 0) {
+                    console.log(99, element);
+                }
+                if (element.name.indexOf("Aria ") > 0) {
+                    console.log(99, element.lang.length, element);
+                }
+                if (element.lang == ('en-US')) {
+                    console.log(993, element);
+                    document.getElementById('dbg').append(element.name);
+                }
+                if (element.lang == ('en-GB')) {
+                    console.log(993, element);
+                    document.getElementById('dbg').append(element.name);
+                }
+            });
+
             //console.log(voices);
             if (voiceId === 1) {
                 utterance.voice = voices[108];//Microsoft Sonia Online (Natural) - English (United Kingdom)
@@ -113,7 +133,7 @@
         <ul id="text_list">
         </ul>
     </div>
-
+    <div id="dbg"></div>
 </body>
 
 </html>
