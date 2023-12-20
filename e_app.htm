@@ -1,4 +1,6 @@
-<html lang="en">
+<!-- index.html zheng6655@163.com -->
+<!DOCTYPE html>
+<html lang="zh_cn">
 <script type="text/javascript">
     let utterance = new SpeechSynthesisUtterance();
     //语速，取值范围(0.1 - 10) 默认值：1
@@ -87,25 +89,31 @@
             + "<button onclick='del(" + i + ")'>删除</button> </li>"
     }
 </script>
-<head><title>english</title>
+
+<head>
+    <title>english</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta charset="UTF-8" />
     <style type="text/css">
         #text_list li {
             text-align: left;
         }
     </style>
 </head>
+
 <body style="text-align: center;" onload="f_init()">
-<button onclick="f_read(1)" style="margin-right:29px;">开始朗读(伦敦)</button>
-<button onclick="f_read(2)" style="margin-right:29px;">开始朗读(美国)</button>
-<button onclick="f_save()">本地保存</button>
-<br>
-<label for="t">英语内容</label><textarea id="t"
-                                     style="width: 400px;height: 60px;">look at my eye,Hi! I'm Amy,wow</textarea>
-<div style="width: 400px;height: 60px;margin: 0 auto;">
-    <ul id="text_list">
-    </ul>
-</div>
+    <button onclick="f_read(1)" style="margin-right:29px;">开始朗读(伦敦)</button>
+    <button onclick="f_read(2)" style="margin-right:29px;">开始朗读(美国)</button>
+    <button onclick="f_save()">本地保存</button>
+    <br>
+    <label for="t">英语内容</label><textarea id="t"
+        style="width: 400px;height: 60px;">look at my eye,Hi! I'm Amy,wow</textarea>
+    <div style="width: 400px;height: 60px;margin: 0 auto;">
+        <ul id="text_list">
+        </ul>
+    </div>
 
 </body>
-</html>
 
+</html>
