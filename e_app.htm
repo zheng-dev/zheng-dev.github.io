@@ -23,91 +23,108 @@
             let voices = window.speechSynthesis.getVoices(); // 获取语言包
 
 
-            voices.forEach(element => {
-                if (element.name.indexOf("Sonia ") > 0) {
-                    console.log(99, element);
-                }
-                if (element.name.indexOf("Aria ") > 0) {
-                    console.log(99, element.lang.length, element);
-                }
-                if (element.lang == ('en-US')) {
-                    console.log(993, element);
-                    document.getElementById('dbg').append(element.name);
-                }
-                if (element.lang == ('en-GB')) {
-                    console.log(993, element);
-                    document.getElementById('dbg').append(element.name);
-                }
-            });
+            // voices.forEach(element => {
+            //     if (element.name.indexOf("Sonia ") > 0) {
+            //         console.log(99, element);
+            //     }
+            //     if (element.name.indexOf("Aria ") > 0) {
+            //         console.log(99, element.lang.length, element);
+            //     }
+            //     if (element.lang == ('en-US')) {
+            //         console.log(993, element);
+            //         document.getElementById('dbg').append(element.name);
+            //     }
+            //     if (element.lang == ('en-GB')) {
+            //         console.log(993, element);
+            //         document.getElementById('dbg').append(element.name);
+            //     }
+            // });
 
             //console.log(voices);
             if (voiceId === 1) {
-                utterance.voice = voices[108];//Microsoft Sonia Online (Natural) - English (United Kingdom)
+                voices.forEach(element => {
+                    if (element.lang == ('en-GB')) {
+                        utterance.voice = element;
+                    }
+                    if (element.name.indexOf("Sonia ") > 0) {
+                        utterance.voice = element;
+                    }
+                });
+                //utterance.voice = voices[108];//Microsoft Sonia Online (Natural) - English (United Kingdom)
             } else {
-                utterance.voice = voices[110];//Microsoft Aria Online (Natural) - English (United States)
+                if (voiceId === 1) {
+                    voices.forEach(element => {
+                        if (element.lang == ('en-US')) {
+                            utterance.voice = element;
+                        }
+                        if (element.name.indexOf("Aria ") > 0) {
+                            utterance.voice = element;
+                        }
+                    });
+                    //utterance.voice = voices[110];//Microsoft Aria Online (Natural) - English (United States)
+                }
             }
+
+            //内容
+            utterance.text = t.value;
+            window.speechSynthesis.speak(utterance);
         }
 
-        //内容
-        utterance.text = t.value;
-        window.speechSynthesis.speak(utterance);
-    }
-
-    //保存
-    function f_save() {
-        //内容
-        console.log(localStorage.key(2));
-        let val = document.getElementById('t').value;
-        if (val !== '') {
-            let index = localStorage.getItem('ls_index');
-            if (index == null) {
-                localStorage.setItem('1', val);
-                localStorage.setItem('ls_index', '1');
-                f_insert(1, val);
-            } else {
-                let newIndex = (Number(index) + 1).toString();
-                localStorage.setItem(newIndex, val);
-                localStorage.setItem('ls_index', newIndex);
-                f_insert(newIndex, val);
-            }
-        }
-    }
-
-    //del
-    function del(index) {
-        let tl = document.getElementById('text_list');
-        tl.removeChild(document.getElementById("l" + index));
-        localStorage.removeItem(index.toString());
-    }
-
-    //设置当前
-    function set_now(val) {
-        document.getElementById('t').value = val;
-    }
-
-    let tl;
-
-    //初始列表
-    function f_init() {
-        t = document.getElementById('t');
-        tl = document.getElementById('text_list');
-        let index = Number(localStorage.getItem('ls_index'));
-        if (index !== 0) {
-            for (let i = 1; i <= index; i++) {
-                let word = localStorage.getItem(i.toString());
-                if (word !== null) {
-                    f_insert(i, word);
+        //保存
+        function f_save() {
+            //内容
+            console.log(localStorage.key(2));
+            let val = document.getElementById('t').value;
+            if (val !== '') {
+                let index = localStorage.getItem('ls_index');
+                if (index == null) {
+                    localStorage.setItem('1', val);
+                    localStorage.setItem('ls_index', '1');
+                    f_insert(1, val);
+                } else {
+                    let newIndex = (Number(index) + 1).toString();
+                    localStorage.setItem(newIndex, val);
+                    localStorage.setItem('ls_index', newIndex);
+                    f_insert(newIndex, val);
                 }
             }
         }
-    }
 
-    //建行
-    function f_insert(i, word) {
-        tl.innerHTML += "<li id='l" + i + "'>" +
-            "<span onclick='set_now(this.innerText)'>" + word + "</span> "
-            + "<button onclick='del(" + i + ")'>删除</button> </li>"
-    }
+        //del
+        function del(index) {
+            let tl = document.getElementById('text_list');
+            tl.removeChild(document.getElementById("l" + index));
+            localStorage.removeItem(index.toString());
+        }
+
+        //设置当前
+        function set_now(val) {
+            document.getElementById('t').value = val;
+        }
+
+        let tl;
+
+        //初始列表
+        function f_init() {
+            t = document.getElementById('t');
+            tl = document.getElementById('text_list');
+            let index = Number(localStorage.getItem('ls_index'));
+            if (index !== 0) {
+                for (let i = 1; i <= index; i++) {
+                    let word = localStorage.getItem(i.toString());
+                    if (word !== null) {
+                        f_insert(i, word);
+                    }
+                }
+            }
+        }
+
+        //建行
+        function f_insert(i, word) {
+            tl.innerHTML += "<li id='l" + i + "'>" +
+                "<span onclick='set_now(this.innerText)'>" + word + "</span> "
+                + "<button onclick='del(" + i + ")'>删除</button> </li>"
+        }
 </script>
 
 <head>
