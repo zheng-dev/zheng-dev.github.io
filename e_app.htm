@@ -50,7 +50,6 @@
         let content, vid;
         function f_read(voiceId) {
             init_v();
-            //console.log(typeof (content));
             window.speechSynthesis.cancel();//先尝试关闭正在播放的
             if (vid !== voiceId) {
                 vid = voiceId;
