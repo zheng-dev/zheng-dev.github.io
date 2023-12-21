@@ -15,6 +15,7 @@
 
     <script type="text/javascript">
         let utterance = new SpeechSynthesisUtterance();
+        window.speechSynthesis.getVoices();//触发语言包异步加载
         //语速，取值范围(0.1 - 10) 默认值：1
         utterance.rate = 0.7;
         //音调，取值范围(0 - 2) 默认值：1
@@ -23,33 +24,36 @@
         //音量，取值范围(0 - 1) 默认值：0.5
         utterance.volume = 1;
 
-        let t, vid;
         //[108];//Microsoft Sonia Online (Natural) - English (United Kingdom)
-        //utterance.voice = voices[110];//Microsoft Aria Online (Natural) - English (United States)
+        //[110];//Microsoft Aria Online (Natural) - English (United States)
         let us, gb;//全局初始
-        window.onload = function () {
-            f_init();
-            let voices1 = window.speechSynthesis.getVoices(); // 获取语言包
-            voices.forEach(element => {
-                if (element.lang == ('en-US')) {
-                    us = element;
+        function init_v() {
+            if (typeof (us) == 'undefined') {
+                let voices1 = window.speechSynthesis.getVoices(); // 获取语言包
+                for (let index = 0; index < voices1.length; index++) {
+                    const element = voices1[index];
+                    if (element.name.indexOf("Sonia ") > 0) {
+                        gb = element;
+                    } else if (element.name.indexOf("Aria ") > 0) {
+                        us = element;
+                    }
+                    if (element.lang == ('en-US') && typeof (us) == "undefined") {
+                        us = element;
+                    } else if (element.lang == ('en-GB') && typeof (gb) == "undefined") {
+                        gb = element;
+                    }
                 }
-                if (element.name.indexOf("Aria ") > 0) {
-                    us = element;
-                }
-                if (element.lang == ('en-GB')) {
-                    gb = element;
-                }
-                if (element.name.indexOf("Sonia ") > 0) {
-                    gb = element;
-                }
-            })
+            }
         }
+
         //朗读
+        let content, vid;
         function f_read(voiceId) {
+            init_v();
+            //console.log(typeof (content));
+            window.speechSynthesis.cancel();//先尝试关闭正在播放的
             if (vid !== voiceId) {
                 vid = voiceId;
-
                 if (voiceId === 1) {
                     utterance.voice = gb;
                 } else {
@@ -57,7 +61,7 @@
                 }
             }
             //内容
-            utterance.text = t.value;
+            utterance.text = content.value;
             window.speechSynthesis.speak(utterance);
         }
 
@@ -94,10 +98,9 @@
         }
 
         let tl;
-
         //初始列表
         function f_init() {
-            t = document.getElementById('t');
+            content = document.getElementById('t');
             tl = document.getElementById('text_list');
             let index = Number(localStorage.getItem('ls_index'));
             if (index !== 0) {
@@ -119,7 +122,7 @@
     </script>
 </head>
 
-<body style="text-align: center;">
+<body style="text-align: center;" onload="f_init();">
     <button onclick="f_read(1)" style="margin-right:29px;">开始朗读(伦敦)</button>
     <button onclick="f_read(2)" style="margin-right:29px;">开始朗读(美国)</button>
     <button onclick="f_save()">本地保存</button>
