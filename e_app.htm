@@ -1,6 +1,6 @@
 <!-- index.html zheng6655@163.com -->
 <!DOCTYPE html>
-<html lang="zh_CN">
+<html lang="zh_cn">
 
 <head>
     <title>english</title>
@@ -10,10 +10,6 @@
     <style type="text/css">
         #text_list li {
             text-align: left;
-        }
-
-        #dbg {
-            color: #fcf9f9;
         }
     </style>
 
@@ -40,7 +36,10 @@
                         gb = element;
                     } else if (element.name.indexOf("Aria ") > 0) {
                         us = element;
+                    } else if (element.name.indexOf("Aaron") > 0) {
+                        us = element;
                     }
+
                     if (element.lang == ('en-US') && typeof (us) == "undefined") {
                         us = element;
                     } else if (element.lang == ('en-GB') && typeof (gb) == "undefined") {
@@ -63,7 +62,6 @@
                     utterance.voice = us;
                 }
             }
-            dbg(utterance.voice.name);
             //内容
             utterance.text = content.value;
             window.speechSynthesis.speak(utterance);
@@ -122,11 +120,6 @@
             tl.innerHTML += "<li id='l" + i + "'>" +
                 "<span onclick='set_now(this.innerText)'>" + word + "</span> "
                 + "<button onclick='del(" + i + ")'>删除</button> </li>"
-        }
-        //dbg打印
-        function dbg(str) {
-            let d = document.getElementById('dbg');
-            d.innerHTML = str;
         }
     </script>
 </head>
