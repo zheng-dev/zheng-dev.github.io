@@ -10,7 +10,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta charset="UTF-8" />
 
-  <!--link rel="stylesheet" href="/mermaid.min.css" /-->
   <style>
     code {
       overflow: auto;
@@ -33,7 +32,8 @@
     window.$docsify = {
       el: '#app',
       // loadSidebar: true,
-      loadNavbar: true,
+      loadNavbar: 'md/_navbar.md',
+
       mergeNavbar: true,
       repo: "https://github.com/zheng-dev/my_all_test0",
       plugins: [
@@ -63,7 +63,7 @@
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/themes/vue.css" />
   <script src="//cdn.staticfile.net/docsify/4.13.1/docsify.js"></script>
 
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
   <script src="//cdn.bootcdn.net/ajax/libs/prism/9000.0.1/components/prism-bash.js"></script>
   <script src="//cdn.bootcdn.net/ajax/libs/prism/9000.0.1/components/prism-javascript.js"></script>
   <script src="//cdn.bootcdn.net/ajax/libs/prism/9000.0.1/components/prism-erlang.js"></script>
