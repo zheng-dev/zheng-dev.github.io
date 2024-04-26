@@ -9,3 +9,8 @@
 文件查找
 --------
 `grep file_monitors ./ --exclude-dir=".svn" --include="*.erl"  -nr`
+
+目录文件对比
+------------
+`diff -uqr -x ".svn" ${exclude} ${1} $copy_dest_dir >${DiffLog}`
+
