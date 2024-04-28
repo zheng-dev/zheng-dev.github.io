@@ -1,8 +1,0 @@
-
-
-//www.bootcdn.cn/mermaid/dist/mermaid.min.css
-1
-
-
-https://blog.csdn.net/cherrylovedog/article/details/100731294
-https://mermaid.nodejs.cn/syntax/sequenceDiagram.html
