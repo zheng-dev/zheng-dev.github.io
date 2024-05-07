@@ -14,3 +14,6 @@
 ------------
 `diff -uqr -x ".svn" ${exclude} ${1} $copy_dest_dir >${DiffLog}`
 
+$$
+A~n-1~*3
+$$
