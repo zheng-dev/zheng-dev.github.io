@@ -15,6 +15,12 @@ https://markdown.com.cn/basic-syntax/images.html
 
 ![线性同余](https://pic4.zhimg.com/v2-0ae6921256f2cd094ed2fa2bbb3f1627_r.jpg)
 
+$N_{j+1}=(A \times N_j+B) \% M $
+
+
+
 [线性同余等算法](https://oi-wiki.org/math/number-theory/linear-equation/)
 [shell编程](https://c.biancheng.net/shell/base/)
 [protobuf](https://protobuf.dev/programming-guides/proto3/)
+
+[md数据公式](https://zhuanlan.zhihu.com/p/441454622)
