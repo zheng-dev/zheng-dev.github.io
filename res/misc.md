@@ -31,7 +31,7 @@ vscode dbg,测试可用
 [dbg参考文章](https://learnku.com/rust/t/36706)
 ```json
 //.vscode\launch.json
-        {
+           {
             "name": "dbg win",
             "type": "cppvsdbg",
             "request": "launch",
@@ -48,5 +48,6 @@ vscode dbg,测试可用
             "request": "launch",
             "program": "${workspaceRoot}/target/debug/rusty-bomber.exe",
             "args": [],
-            "
+            "cwd": "${workspaceRoot}"
+        },
 ```
