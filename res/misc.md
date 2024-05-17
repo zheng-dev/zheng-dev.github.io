@@ -24,3 +24,29 @@ $N_{j+1}=(A \times N_j+B) \% M $
 [protobuf](https://protobuf.dev/programming-guides/proto3/)
 
 [md数据公式](https://zhuanlan.zhihu.com/p/441454622)
+
+vscode dbg,测试可用
+-------------------
+
+[dbg参考文章](https://learnku.com/rust/t/36706)
+```json
+//.vscode\launch.json
+        {
+            "name": "dbg win",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/target/debug/rusty-bomber.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceRoot}",
+            "environment": [],
+            "externalConsole": true
+        },
+        {
+            "name": "dbg osx",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceRoot}/target/debug/rusty-bomber.exe",
+            "args": [],
+            "
+```
