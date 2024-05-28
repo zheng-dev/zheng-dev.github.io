@@ -50,4 +50,20 @@ vscode dbg,测试可用
             "args": [],
             "cwd": "${workspaceRoot}"
         },
+
+//.vscode\tasks.json
+        {
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "build",
+			"type": "shell",
+			"command": "cargo run --example breakout ;echo ======done====",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}
 ```
