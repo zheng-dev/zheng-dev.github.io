@@ -31,39 +31,69 @@ vscode dbg,测试可用
 [dbg参考文章](https://learnku.com/rust/t/36706)
 ```json
 //.vscode\launch.json
-           {
-            "name": "dbg win",
-            "type": "cppvsdbg",
-            "request": "launch",
-            "program": "${workspaceRoot}/target/debug/rusty-bomber.exe",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceRoot}",
-            "environment": [],
-            "externalConsole": true
-        },
-        {
-            "name": "dbg osx",
-            "type": "lldb",
-            "request": "launch",
-            "program": "${workspaceRoot}/target/debug/rusty-bomber.exe",
-            "args": [],
-            "cwd": "${workspaceRoot}"
-        },
+{
+    "name": "dbg win",
+    "type": "cppvsdbg",
+    "request": "launch",
+    "program": "${workspaceRoot}/target/debug/rusty-bomber.exe",
+    "args": [],
+    "stopAtEntry": false,
+    "cwd": "${workspaceRoot}",
+    "environment": [],
+    "externalConsole": true
+},
+{
+    "name": "dbg osx",
+    "type": "lldb",
+    "request": "launch",
+    "program": "${workspaceRoot}/target/debug/rusty-bomber.exe",
+    "args": [],
+    "cwd": "${workspaceRoot}"
+},
 
 //.vscode\tasks.json
+{
+    "version": "2.0.0",
+    "tasks": [
         {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "build",
-			"type": "shell",
-			"command": "cargo run --example breakout ;echo ======done====",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			}
-		}
-	]
+            "label": "build",
+            "type": "shell",
+            "command": "cargo run --example breakout ;echo ======done====",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
 }
 ```
+rust
+-----
+#### 1条件编译
+```rust
+//只有在 webp feature 被定义后，以下的 webp 模块才能被引入进来
+#[cfg(feature = "webp")]
+pub mod webp;
+```
+
+```toml
+[features]
+# 定义一个 feature : webp, 但它并没有启用其它 feature
+webp = []
+ico = ["bmp", "png"]
+```
+#### 2cargo.toml说明
+[cargo.toml说明](https://course.rs/cargo/reference/manifest.html)   
+#### 3派生特性trait
+```rust
+//被 derive 标记的对象会自动实现对应的默认特征代码，继承相应的功能
+#[derive(Debug, PartialEq, Eq, Copy, Clone)]
+enum Collision {
+    Left,
+    Right,
+}
+```
+
+Rust网址
+--------
+[Rust语言中文社区](https://rustcc.cn/article?id=c6b9d6c4-02d0-44a4-adc2-20129166ebda)
