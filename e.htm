@@ -131,16 +131,39 @@
         function f_insert(i, word) {
             tl.innerHTML += "<li id='l" + i + "'>" +
                 "<span onclick='set_now(this.innerText)'>" + word + "</span> "
-                + "<button onclick='del(" + i + ")'>删除</button> </li>"
+                + "<button onclick='del(" + i + ")'>删除</button> <button onclick='txt_read(\"" + word + "\")'>阅读</button></li>"
+        }
+        function txt_read(word) {
+            set_now(word);
+            f_read(2);
+        }
+        //读文件
+        function form_txt(txt) {
+            $.ajax({
+                url: txt, success: function (result) {
+                    let words = result.split(/[(\r\n)\r\n]+/); // 根据换行或者回车进行
+                    let index = Number(localStorage.getItem('ls_index'));
+
+                    words.forEach(function (word) {
+                        index = index + 1;
+                        console.log(word);
+                        f_insert(index, word);
+                    });
+                }
+            });
         }
     </script>
 </head>
+
 
 <body style="text-align: center;" onload="f_init();">
     <button onclick="f_read(1)" style="margin-right:29px;">开始朗读(伦敦)</button>
     <button onclick="f_read(2)" style="margin-right:29px;">开始朗读(美国)</button>
     <button onclick="f_save()">本地保存</button>
+
     <br>
+    <button onclick="form_txt('/lession1b.txt');">1年级下</button>
+    <hr />
     <label for="t">英语内容</label><textarea id="t"
         style="width: 400px;height: 60px;">look at my eye,Hi! I'm Amy,wow</textarea>
     <div style="width: 400px;height: 60px;margin: 0 auto;">
@@ -148,5 +171,8 @@
         </ul>
     </div>
     <div id="dbg"></div>
+    <div id="text"></div>
 </body>
+
+<script src="https://cdn.staticfile.net/jquery/1.10.2/jquery.min.js"></script>
 <html>
