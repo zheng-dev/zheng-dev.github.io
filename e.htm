@@ -38,43 +38,10 @@
 
         //[108];//Microsoft Sonia Online (Natural) - English (United Kingdom)
         //[110];//Microsoft Aria Online (Natural) - English (United States)
-        let us, gb;//全局初始
-        function init_v() {
-            if (typeof (us) == 'undefined') {
-                let voices1 = window.speechSynthesis.getVoices(); // 获取语言包
-                for (let index = 0; index < voices1.length; index++) {
-                    const element = voices1[index];
-                    if (element.name.indexOf("Sonia ") > 0) {
-                        gb = element;
-                    } else if (element.name.indexOf("Aria ") > 0) {
-                        us = element;
-                    } else if (element.name.indexOf("Aaron") > 0) {
-                        us = element;
-                    }
-
-                    if (element.lang == ('en-US') && typeof (us) == "undefined") {
-                        us = element;
-                    } else if (element.lang == ('en-GB') && typeof (gb) == "undefined") {
-                        gb = element;
-                    }
-                }
-            }
-        }
-
         //朗读
         let content, vid;
         function f_read(voiceId) {
-            init_v();
             window.speechSynthesis.cancel();//先尝试关闭正在播放的
-            if (vid !== voiceId) {
-                vid = voiceId;
-                if (voiceId === 1) {
-                    utterance.voice = gb;
-                } else {
-                    utterance.voice = us;
-                }
-            }
-            //内容
             utterance.text = content.value;
             window.speechSynthesis.speak(utterance);
         }
@@ -127,7 +94,7 @@
             }
         }
 
-        //建行
+        //生成一行句子
         function f_insert(i, word) {
             tl.innerHTML += "<li id='l" + i + "'>" +
                 "<span onclick='set_now(this.innerText);'>" + word + "</span> "
@@ -156,8 +123,9 @@
 
 
 <body style="text-align: center;" onload="f_init();">
-    <button onclick="f_read(1)" style="margin-right:29px;">开始朗读(伦敦)</button>
-    <button onclick="f_read(2)" style="margin-right:29px;">开始朗读(美国)</button>
+    <select id="speaker" onchange="ch_speeker()">
+    </select>
+    <button onclick="f_read(1)" style="margin-right:29px;">开始朗读</button>
     <button onclick="f_save()">本地保存</button>
 
     <br>
@@ -174,4 +142,26 @@
 </body>
 
 <script src="https://cdn.staticfile.net/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">
+    //加载完成
+    $(function () {
+        let s = $("#speaker");
+        let voices1 = window.speechSynthesis.getVoices(); // 获取语言包
+        for (let index = 0; index < voices1.length; index++) {
+            const element = voices1[index];
+            if (element.lang.indexOf("en-GB") >= 0)
+                s.append("<option value='" + index + "'>伦敦音=" + element.name + "</option>");
+            else if (element.lang.indexOf("en-US") >= 0)
+                s.append("<option value='" + index + "'>美国音=" + element.name + "</option>");
+        }
+    });
+    //换语音
+    function ch_speeker() {
+        let i = $("#speaker").val();
+        // console.log(i);
+        let voices1 = window.speechSynthesis.getVoices(); // 获取语言包
+        utterance.voice = voices1[i];
+    }
+</script>
+
 <html>
