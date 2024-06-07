@@ -39,7 +39,7 @@
         //[108];//Microsoft Sonia Online (Natural) - English (United Kingdom)
         //[110];//Microsoft Aria Online (Natural) - English (United States)
         //朗读
-        let content, vid;
+        let content;
         function f_read(voiceId) {
             window.speechSynthesis.cancel();//先尝试关闭正在播放的
             utterance.text = content.value;
@@ -151,17 +151,13 @@
         for (let index = 0; index < voices1.length; index++) {
             const element = voices1[index];
 
-            if (si == index) {
-                if (element.lang.indexOf("en-GB") >= 0)
-                    s.append("<option value='" + index + "' selected>伦敦音=" + element.name + "</option>");
-                else if (element.lang.indexOf("en-US") >= 0)
-                    s.append("<option value='" + index + "' selected>美国音=" + element.name + "</option>");
-            } else {
-                if (element.lang.indexOf("en-GB") >= 0)
-                    s.append("<option value='" + index + "'>伦敦音=" + element.name + "</option>");
-                else if (element.lang.indexOf("en-US") >= 0)
-                    s.append("<option value='" + index + "'>美国音=" + element.name + "</option>");
-            }
+            let default1 = '';
+            if (si == index) default1 = 'selected';
+
+            if (element.lang.indexOf("en-GB") >= 0)
+                s.append("<option value='" + index + "'" + default1 + ">英音=" + element.name + "</option>");
+            else if (element.lang.indexOf("en-US") >= 0)
+                s.append("<option value='" + index + "'" + default1 + ">美音=" + element.name + "</option>");
 
         }
     });
