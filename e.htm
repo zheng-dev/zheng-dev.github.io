@@ -146,21 +146,31 @@
     //加载完成
     $(function () {
         let s = $("#speaker");
+        let si = localStorage.getItem('speek_index');
         let voices1 = window.speechSynthesis.getVoices(); // 获取语言包
         for (let index = 0; index < voices1.length; index++) {
             const element = voices1[index];
-            if (element.lang.indexOf("en-GB") >= 0)
-                s.append("<option value='" + index + "'>伦敦音=" + element.name + "</option>");
-            else if (element.lang.indexOf("en-US") >= 0)
-                s.append("<option value='" + index + "'>美国音=" + element.name + "</option>");
+
+            if (si == index) {
+                if (element.lang.indexOf("en-GB") >= 0)
+                    s.append("<option value='" + index + "' selected>伦敦音=" + element.name + "</option>");
+                else if (element.lang.indexOf("en-US") >= 0)
+                    s.append("<option value='" + index + "' selected>美国音=" + element.name + "</option>");
+            } else {
+                if (element.lang.indexOf("en-GB") >= 0)
+                    s.append("<option value='" + index + "'>伦敦音=" + element.name + "</option>");
+                else if (element.lang.indexOf("en-US") >= 0)
+                    s.append("<option value='" + index + "'>美国音=" + element.name + "</option>");
+            }
+
         }
     });
     //换语音
     function ch_speeker() {
         let i = $("#speaker").val();
-        // console.log(i);
         let voices1 = window.speechSynthesis.getVoices(); // 获取语言包
         utterance.voice = voices1[i];
+        localStorage.setItem('speek_index', i);
     }
 </script>
 
