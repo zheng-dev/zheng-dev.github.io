@@ -46,39 +46,9 @@
             window.speechSynthesis.speak(utterance);
         }
 
-        //保存
-        function f_save() {
-            //内容
-            console.log(localStorage.key(2));
-            let val = document.getElementById('t').value;
-            if (val !== '') {
-                let index = localStorage.getItem('ls_index');
-                if (index == null) {
-                    localStorage.setItem('1', val);
-                    localStorage.setItem('ls_index', '1');
-                    f_insert(1, val);
-                } else {
-                    let newIndex = (Number(index) + 1).toString();
-                    localStorage.setItem(newIndex, val);
-                    localStorage.setItem('ls_index', newIndex);
-                    f_insert(newIndex, val);
-                }
-            }
-        }
-
-        //del
-        function del(index) {
-            let tl = document.getElementById('text_list');
-            tl.removeChild(document.getElementById("l" + index));
-            localStorage.removeItem(index.toString());
-        }
-
-        //设置当前
-        function set_now(val) {
-            document.getElementById('t').value = val;
-        }
 
         let tl;
+        let open_txt = {};
         //初始列表
         function f_init() {
             content = document.getElementById('t');
@@ -93,31 +63,18 @@
                 }
             }
         }
-
         //生成一行句子
         function f_insert(i, word) {
             tl.innerHTML += "<li id='l" + i + "'>" +
                 "<span onclick='set_now(this.innerText);'>" + word + "</span> "
                 + "<button onclick='del(" + i + ')\'>删除</button> <button onclick="txt_read(' + i + ')">阅读</button></li>'
         }
+        //阅读本行
         function txt_read(m) {
             $('#l' + m).find("span").click();
             f_read(2);
         }
-        //读文件
-        function form_txt(txt) {
-            $.ajax({
-                url: txt, success: function (result) {
-                    let words = result.split(/[(\r\n)\r\n]+/); // 根据换行或者回车进行
-                    let index = Number(localStorage.getItem('ls_index'));
 
-                    words.forEach(function (word) {
-                        index = index + 1;
-                        f_insert(index, word);
-                    });
-                }
-            });
-        }
     </script>
 </head>
 
@@ -167,6 +124,53 @@
         let voices1 = window.speechSynthesis.getVoices(); // 获取语言包
         utterance.voice = voices1[i];
         localStorage.setItem('speek_index', i);
+    }
+    //读文件
+    function form_txt(txt) {
+        if (open_txt[txt] != 1) {
+            open_txt[txt] = 1;//不重复加
+            $.ajax({
+                url: txt, success: function (result) {
+                    let words = result.split(/[(\r\n)\r\n]+/); // 根据换行或者回车进行
+                    let index = Number(localStorage.getItem('ls_index'));
+
+                    words.forEach(function (word) {
+                        index = index + 1;
+                        f_insert(index, word);
+                    });
+                }
+            });
+        }
+
+    }
+    //保存
+    function f_save() {
+        //内容
+        console.log(localStorage.key(2));
+        let val = document.getElementById('t').value;
+        if (val !== '') {
+            let index = localStorage.getItem('ls_index');
+            if (index == null) {
+                localStorage.setItem('1', val);
+                localStorage.setItem('ls_index', '1');
+                f_insert(1, val);
+            } else {
+                let newIndex = (Number(index) + 1).toString();
+                localStorage.setItem(newIndex, val);
+                localStorage.setItem('ls_index', newIndex);
+                f_insert(newIndex, val);
+            }
+        }
+    }
+    //del
+    function del(index) {
+        let tl = document.getElementById('text_list');
+        tl.removeChild(document.getElementById("l" + index));
+        localStorage.removeItem(index.toString());
+    }
+    //设置当前
+    function set_now(val) {
+        document.getElementById('t').value = val;
     }
 </script>
 
