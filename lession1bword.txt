@@ -28,3 +28,17 @@ chicken
 egg
 hungry
 want
+and
+juice
+tea
+milk
+water
+thirsty
+thanks
+shirt
+T-shirt
+skirt
+dress
+socks
+shorts
+your
