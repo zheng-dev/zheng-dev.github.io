@@ -14,6 +14,10 @@
 ------------
 `diff -uqr -x ".svn" ${exclude} ${1} $copy_dest_dir >${DiffLog}`
 
+git
+----
+`git branch --set-upstream-to=origin/main`
+
 $$
 A~n-1~*3
 $$

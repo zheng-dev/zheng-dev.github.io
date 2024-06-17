@@ -29,7 +29,7 @@
         let utterance = new SpeechSynthesisUtterance();
         window.speechSynthesis.getVoices();//触发语言包异步加载
         //语速，取值范围(0.1 - 10) 默认值：1
-        utterance.rate = 0.7;
+        utterance.rate = 0.8;
         //音调，取值范围(0 - 2) 默认值：1
         //utterance.pitch = 0;
 
@@ -88,6 +88,7 @@
     <br>
     <button onclick="form_txt('/lession1b.txt');">1年级下</button>
     <button onclick="form_txt('/lession1bword.txt');">1年级下单词</button>
+    <button onclick="form_txt('/read1b.txt');">群文阅读</button>
     <hr />
     <label for="t">英语内容</label><textarea id="t"
         style="width: 400px;height: 60px;">look at my eye,Hi! I'm Amy,wow</textarea>
