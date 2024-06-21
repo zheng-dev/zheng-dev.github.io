@@ -13,6 +13,11 @@
 目录文件对比
 ------------
 `diff -uqr -x ".svn" ${exclude} ${1} $copy_dest_dir >${DiffLog}`
+screen命令
+-----------
+`screen -S zzc` 创建会话
+`screen -R zzc` 重进会话
+快捷键ctrl+a,d断开当前会话(不是退出终止)
 
 git
 ----
