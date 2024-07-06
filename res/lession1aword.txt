@@ -2,9 +2,14 @@ dog
 bird
 tiger
 monkey
-cat what
+cat
+what
 it
 how
 many
 are
 there
+one
+tow
+there
+four
