@@ -5,6 +5,7 @@
 1. `apt install ubuntu-gnome-desktop`安装指定包
 2. `apt list --installed`查看安装了的包
 
+`yum install python3.11 --nogpgcheck`可以不检查gpg,直接安装
 
 文件查找
 --------
@@ -21,6 +22,10 @@ screen命令
 git
 ----
 `git branch --set-upstream-to=origin/main`
+
+python
+-------
+`python -m py_compile test.py` 将py编译成pyc,`python -m compileall D:\MyPython`将目录下的所有py都编译成pyc
 
 $$
 A~n-1~*3
