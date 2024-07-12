@@ -19,15 +19,32 @@
     <!-- 在定义了apple-mobile-web-app-capable的前提下，设置状态栏的属性值apple-mobile-web-app-status-bar-style才有效； -->
 
     <meta charset="UTF-8" />
+    <style>
+        #nfile {
+            padding: 15px 0;
+        }
+
+        #myAudio {
+            margin: 0 auto;
+            display: block;
+        }
+
+        .giscus {
+            margin-top: 15px;
+        }
+    </style>
 
 </head>
 
 
 <body style="text-align: center;">
+    <marquee direction="right" bgcolor="#fff" scrolldelay="100">
+        <font face="楷体" color="#F37327" size="2" behavior="alternate">
+            <span style="color:#F37327;text-decoration: none">鱼宝小听</span>
+        </font>
+    </marquee>
     <input type="file" onchange="new_file(this)" id="nfile" />
-    <br />
     <audio src="" controls autoplay="false" id="myAudio" loop="loop"></audio>
-    <br />
 
     <button onclick="playAudio()">Play</button>
     <button onclick="pauseAudio()">Pause</button>
