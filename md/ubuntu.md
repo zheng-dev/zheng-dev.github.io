@@ -28,5 +28,5 @@ python
 `python -m py_compile test.py` 将py编译成pyc,`python -m compileall D:\MyPython`将目录下的所有py都编译成pyc
 
 $$
-A~n-1~*3+2
+A~n-1~*3+2a
 $$
