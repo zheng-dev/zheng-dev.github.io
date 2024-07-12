@@ -23,12 +23,52 @@
 </head>
 
 
-<body style="text-align: center;" onload="f_init();">
+<body style="text-align: center;">
+    <input type="file" onchange="new_file(this)" id="nfile" />
+    <br />
+    <audio src="" controls autoplay="false" id="myAudio" loop="loop"></audio>
+    <br />
+
+    <button onclick="playAudio()">Play</button>
+    <button onclick="pauseAudio()">Pause</button>
+    <button onclick="stopAudio()">Stop</button>
+
+
+
+    <br />
     <script src="https://giscus.app/client.js" data-repo="zheng-dev/desk_time"
         data-repo-id="MDEwOlJlcG9zaXRvcnkxMTI4MTUwNTQ=" data-category="General" data-category-id="DIC_kwDOBrlrzs4CfrfH"
         data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0"
-        data-input-position="right" data-theme="light" data-lang="zh-CN" crossorigin="anonymous" async>
-        </script>
+        data-input-position="right" data-theme="light" data-lang="zh-CN" crossorigin="anonymous" async> </script>
+    <script>
+        var audio = document.getElementById('myAudio');
+
+        function playAudio() {
+            if (true != audio.mPlaying) {
+                audio.play();
+                audio.mPlaying = true;
+            }
+        }
+
+        function pauseAudio() {
+            audio.mPlaying = false;
+            audio.pause();
+        }
+
+        function stopAudio() {
+            audio.mPlaying = false;
+            audio.pause();
+            audio.currentTime = 0; //重置位置
+        }
+        function new_file(files) {
+            let fReader = new FileReader();
+            fReader.readAsDataURL(files.files[0]);
+            fReader.onload = function (e) {
+                let content = e.target.result;
+                audio.src = content;
+            }
+        }
+    </script>
 </body>
 
 
