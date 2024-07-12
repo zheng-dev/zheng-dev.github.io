@@ -21,19 +21,12 @@
     <meta charset="UTF-8" />
     <style>
         #nfile {
-
-            border-radius: 30%;
-            background-color: #868080;
+            display: none;
         }
 
         #myAudio {
             margin: 0 auto;
-            width: 500px;
-            display: block;
-        }
-
-        .giscus {
-            margin-top: 15px;
+            width: 100%;
         }
     </style>
 
@@ -43,10 +36,11 @@
 <body style="text-align: center;">
     <marquee direction="right" bgcolor="#fff" scrolldelay="100">
         <font face="楷体" color="#F37327" size="2" behavior="alternate">
-            <span style="color:#F37327;text-decoration: none">鱼宝小听</span>
+            <span style="color:#F37327;text-decoration: none" id="name1">鱼宝小听</span>
         </font>
     </marquee>
     <input type="file" onchange="new_file(this)" id="nfile" />
+    <a href="javascript:void(0)" onclick="open_mp3()">选择本地音频</a>
     <audio src="" controls autoplay="false" id="myAudio" loop="loop"></audio>
     <!-- 
     <button onclick="playAudio()">Play</button>
@@ -76,9 +70,14 @@
             audio.pause();
             audio.currentTime = 0; //重置位置
         }
+        function open_mp3() {
+            document.getElementById('nfile').click();
+        }
         function new_file(files) {
+            console.log(files.files[0])
             let fReader = new FileReader();
             fReader.readAsDataURL(files.files[0]);
+            document.getElementById('name1').innerHTML = "鱼宝小听:" + files.files[0].name;
             fReader.onload = function (e) {
                 let content = e.target.result;
                 audio.src = content;
