@@ -1,0 +1,91 @@
+<!-- index.html zheng6655@163.com -->
+<!DOCTYPE html>
+<html lang="zh_cn">
+
+<head>
+    <title>鱼宝小听</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <!-- 自定义应用图标可用 -->
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="//favicon.ico">
+    <!-- 全屏设置 -->
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+
+    <!-- 网站开启对 web app 程序的支持 具体表现为去除浏览器地址栏和底部导航栏 ：先保存为桌面书签，然后通过书签打开即可生效-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- 用来定义顶部状态栏的形式默认是default为白色 black为黑色 black-translucent为灰色半透明（会占据屏幕的约20px，不同的设备可能会有差异）-->
+    <!-- 在定义了apple-mobile-web-app-capable的前提下，设置状态栏的属性值apple-mobile-web-app-status-bar-style才有效； -->
+
+    <meta charset="UTF-8" />
+    <style>
+        #nfile {
+            display: none;
+        }
+
+        #myAudio {
+            margin: 0 auto;
+            width: 100%;
+            height: 50px;
+        }
+    </style>
+
+</head>
+
+
+<body style="text-align: center;">
+    <marquee direction="left" bgcolor="#fff" scrolldelay="100">
+        <font face="楷体" color="#F37327" size="2" behavior="alternate">
+            <span style="color:#F37327;text-decoration: none" id="name1">鱼宝小听</span>
+        </font>
+    </marquee>
+    <input type="file" onchange="new_file(this)" id="nfile" />
+    <a href="javascript:void(0)" onclick="open_mp3()">选择本地音频</a>
+    <audio src="" controls autoplay="false" id="myAudio" loop="loop"></audio>
+    <!-- 
+    <button onclick="playAudio()">Play</button>
+    <button onclick="pauseAudio()">Pause</button> -->
+    <button onclick="stopAudio()">Stop</button>
+
+
+
+
+    <script>
+        var audio = document.getElementById('myAudio');
+
+        function playAudio() {
+            if (true != audio.mPlaying) {
+                audio.play();
+                audio.mPlaying = true;
+            }
+        }
+
+        function pauseAudio() {
+            audio.mPlaying = false;
+            audio.pause();
+        }
+
+        function stopAudio() {
+            audio.mPlaying = false;
+            audio.pause();
+            audio.currentTime = 0; //重置位置
+        }
+        function open_mp3() {
+            document.getElementById('nfile').click();
+        }
+        function new_file(files) {
+            console.log(files.files[0])
+            let fReader = new FileReader();
+            fReader.readAsDataURL(files.files[0]);
+            document.getElementById('name1').innerHTML = "鱼宝小听:" + files.files[0].name;
+            fReader.onload = function (e) {
+                let content = e.target.result;
+                audio.src = content;
+            }
+        }
+    </script>
+</body>
+
+
+<html>
