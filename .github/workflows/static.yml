@@ -41,6 +41,9 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+      - name:cp404
+        shell:bash
+        run:cp index.html 404.html 
 
 # ---
 # permalink: /index.html
