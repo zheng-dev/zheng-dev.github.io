@@ -10,6 +10,12 @@
 文件查找
 --------
 `grep file_monitors ./ --exclude-dir=".svn" --include="*.erl"  -nr`
+```bash
+#~/.bashrc文件中
+alias warn='f(){ grep $1 warn.log.2024-07-1*;};f'
+alias login='f(){ grep $1 login.log.2024-07-1*;};f'
+alias online='netstat -anl |grep 11010 |grep ESTABLISHED |wc -l'
+```
 
 目录文件对比
 ------------
