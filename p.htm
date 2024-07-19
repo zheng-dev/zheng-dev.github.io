@@ -42,40 +42,59 @@
     </marquee>
     <input type="file" onchange="new_file(this)" id="nfile" />
     <a href="javascript:void(0)" onclick="open_mp3()">选择本地音频</a>
-    <audio src="" controls autoplay="false" id="myAudio" loop="loop"></audio>
-    <!-- 
-    <button onclick="playAudio()">Play</button>
-    <button onclick="pauseAudio()">Pause</button> -->
-    <button onclick="stopAudio()">Stop</button>
+    <audio src="" controls autoplay="false" id="myAudio" loop="loop" ontimeupdate="a_update()"></audio>
+
+    <button onclick="setBegin()">设置句头</button>
+    <button onclick="loopBegin()">循环到此</button>
+    <button onclick="loopCancel()">取消单句</button>
 
 
 
 
     <script>
         var audio = document.getElementById('myAudio');
+        audio.mEnd = 0;
 
-        function playAudio() {
-            if (true != audio.mPlaying) {
-                audio.play();
+        //进度检查是否要单句循环
+        function a_update() {
+            if (audio.mEnd > 0) {
+                if ((audio.currentTime - audio.mEnd) > 0.05) {
+                    audio.pause();
+                    audio.currentTime = audio.mBegin;
+                    setTimeout(function () { audio.play(); }, 1200);
+                }
+            }
+        }
+        //取消单句
+        function loopCancel() {
+            audio.pause();
+            audio.mEnd = 0;
+        }
+        //开始单句循环
+        function loopBegin() {
+            console.log(audio.mEnd, ";", audio.mBegin)
+            if (audio.mBegin > 0 && audio.mEnd == 0) {
+                audio.pause();
+                audio.mEnd = audio.currentTime;
+                audio.currentTime = audio.mBegin;
+                setTimeout(function () { audio.play(); }, 1200);
                 audio.mPlaying = true;
             }
         }
-
-        function pauseAudio() {
-            audio.mPlaying = false;
+        //设置单句并没有
+        function setBegin() {
+            audio.mBegin = audio.currentTime;
             audio.pause();
+            alert("句头设置成功")
+            audio.play();
         }
 
-        function stopAudio() {
-            audio.mPlaying = false;
-            audio.pause();
-            audio.currentTime = 0; //重置位置
-        }
         function open_mp3() {
             document.getElementById('nfile').click();
         }
+
         function new_file(files) {
-            console.log(files.files[0])
+            // console.log(files.files[0])
             let fReader = new FileReader();
             fReader.readAsDataURL(files.files[0]);
             document.getElementById('name1').innerHTML = "鱼宝小听:" + files.files[0].name;
