@@ -53,6 +53,7 @@
 
     <script>
         var audio = document.getElementById('myAudio');
+        audio.mBegin = 0;
         audio.mEnd = 0;
 
         //进度检查是否要单句循环
@@ -69,22 +70,25 @@
         function loopCancel() {
             audio.pause();
             audio.mEnd = 0;
+            audio.mBegin = 0;
         }
         //开始单句循环
         function loopBegin() {
-            console.log(audio.mEnd, ";", audio.mBegin)
             if (audio.mBegin > 0 && audio.mEnd == 0) {
+                if (audio.mBegin >= audio.currentTime) {
+                    return alert("句头位置大于当前进度,循环失败");
+                }
                 audio.pause();
                 audio.mEnd = audio.currentTime;
                 audio.currentTime = audio.mBegin;
                 setTimeout(function () { audio.play(); }, 1200);
-                audio.mPlaying = true;
             }
         }
         //设置单句并没有
         function setBegin() {
-            audio.mBegin = audio.currentTime;
             audio.pause();
+            audio.mBegin = audio.currentTime;
+            audio.mEnd = 0;
             alert("句头设置成功")
             audio.play();
         }
