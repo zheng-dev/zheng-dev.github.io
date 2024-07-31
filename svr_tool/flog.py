@@ -59,7 +59,7 @@ class Find:
         del pro
         #显示
         try:
-            self.retList.sort()
+            self.retList.sort(reverse=True)
         except:
             pass
         print(f"sort:{time.time()}")
