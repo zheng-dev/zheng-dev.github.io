@@ -38,7 +38,8 @@ class Find:
         startStr= sys.argv[2]
         endStr=sys.argv[3]
         print(sys.argv[1],startStr,endStr,files)
-        self.rowNum4Page=os.get_terminal_size()-4
+        c,row=os.get_terminal_size()
+        self.rowNum4Page=row-4
         #整理出结果[(sortField,findStr，file,lineNum)]
         pro=Progress()
         for f in files:
