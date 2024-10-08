@@ -37,6 +37,8 @@ $$
 A~n-1~*3
 $$
 
+erl安装
+-------
 ```bash
 tar -zxf otp_src_24.3.4.12.tar.gz
 cd 源码包
