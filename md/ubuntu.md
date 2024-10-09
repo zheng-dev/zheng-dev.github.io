@@ -32,6 +32,8 @@ git
 python
 -------
 `python -m py_compile test.py` 将py编译成pyc,`python -m compileall D:\MyPython`将目录下的所有py都编译成pyc
+打包成exe
+`pyinstaller -F -w .\db_read.py`
 
 $$
 A~n-1~*3
