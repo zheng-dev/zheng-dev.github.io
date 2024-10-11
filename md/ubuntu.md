@@ -35,6 +35,13 @@ python
 打包成exe
 `pyinstaller -F -w .\db_read.py`
 
+杂项
+----
+
+```bash
+在win中直接以root身份运行wsl
+wsl --user root
+```
 $$
 A~n-1~*3
 $$
