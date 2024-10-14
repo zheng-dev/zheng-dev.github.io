@@ -33,7 +33,7 @@ python
 -------
 `python -m py_compile test.py` 将py编译成pyc,`python -m compileall D:\MyPython`将目录下的所有py都编译成pyc
 打包成exe
-`pyinstaller -F -w .\db_read.py`
+`pyinstaller --optimize 2 -F -w .\db_read.py` upx.exe下载放到`venv\Scripts`目录即会生效，加了这2个会使9.83 MB的变小到8.03 MB
 
 杂项
 ----
