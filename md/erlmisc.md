@@ -12,6 +12,8 @@ cd 源码包
 make && make install
 ```
 
+集群无码启动
+------------
 ```erlang
 erl_boot_server:add_slave({172,16,0,1}),
 erl_boot_server:which_slaves().
