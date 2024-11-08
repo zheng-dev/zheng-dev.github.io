@@ -15,6 +15,8 @@
 alias warn='f(){ grep $1 warn.log.2024-07-1*;};f'
 alias login='f(){ grep $1 login.log.2024-07-1*;};f'
 alias online='netstat -anl |grep 11010 |grep ESTABLISHED |wc -l'
+
+date "+%Y%m%d%H%M%S"
 ```
 
 目录文件对比
