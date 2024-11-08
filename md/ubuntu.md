@@ -36,6 +36,17 @@ python
 `python -m py_compile test.py` 将py编译成pyc,`python -m compileall D:\MyPython`将目录下的所有py都编译成pyc
 打包成exe
 `pyinstaller --optimize 2 -F -w .\db_read.py` upx.exe下载放到`venv\Scripts`目录即会生效，加了这2个会使9.83 MB的变小到8.03 MB
+```bat
+@echo off
+::汉字路径
+chcp 65001
+cd /d  d:\my_all_test\server_tools\yk_tool\jira\.db\
+call ..\venv\Scripts\activate.bat
+pyinstaller --optimize 2 -F -i a.ico -w ..\db_read.py
+xcopy /y /f dist\db_read.exe  G:\后台\db_game\
+TortoiseProc.exe/command:commit /path:"G:\后台\db_game\" /closeonend:2  /logmsg:"new xx"
+pause
+```
 
 杂项
 ----
