@@ -35,7 +35,23 @@ python
 -------
 `python -m py_compile test.py` 将py编译成pyc,`python -m compileall D:\MyPython`将目录下的所有py都编译成pyc
 打包成exe
-`pyinstaller --optimize 2 -F -w .\db_read.py` upx.exe下载放到`venv\Scripts`目录即会生效，加了这2个会使9.83 MB的变小到8.03 MB
+`pyinstaller --optimize 2 -F -i a2.ico -w --add-data="a.ico;." ..\db_read.py` upx.exe下载放到`venv\Scripts`目录即会生效，加了这2个会使9.83 MB的变小到8.03 MB
+
+```py
+def get_resource_path(relative_path):
+    """获取资源文件绝对路径，用于打包后的程序访问资源文件"""
+    import sys, os
+
+    try:
+        # PyInstaller 创建的临时文件夹，存放资源文件
+        base_path = sys._MEIPASS
+    except Exception:
+        # 没有打包或者不是通过 PyInstaller 打包
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+```
+
 ```bat
 @echo off
 ::汉字路径
