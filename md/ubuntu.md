@@ -71,6 +71,31 @@ pause
 在win中直接以root身份运行wsl
 wsl --user root
 ```
+vim配置
+-------
+`Ctrl + [`来代替esc;`^u`向上翻页`^d`向下翻页;`7j`下跳7行,`7k`上跳7行;`w`跳到下个单词开头，`b`前跳;
+`f`再界要找的字母直接定位;`0`本行首,`$`本行尾;`gg`文件首;
+`yaw`复制本单词(yank all words),`yy`cp本行`y4j`cp下4行,可组合定范围;
+`daw`删除本单词,`dd`删除本行,可组合定范围;
+`O`向上插入一行,`o`向下插入一行
+
+```bash
+set number
+set noexpandtab
+set tabstop=4
+set syntax=on
+set cursorline
+set mouse=a
+set selection=exclusive
+set selectmode=mouse,key
+set showmatch
+map <C-S> :w<CR>
+nmap ; :
+set noswapfile		".swp
+set statusline +=%2*/%L%*               "total line
+
+```
+
 $$
 A~n-1~*3
 $$
