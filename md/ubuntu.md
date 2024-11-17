@@ -83,7 +83,7 @@ vim配置
 `O`向上插入一行,`o`向下插入一行
 
 ```bash
-set number
+set relativenumber
 set noexpandtab
 set tabstop=4
 set syntax=on
@@ -94,8 +94,9 @@ set selectmode=mouse,key
 set showmatch
 map <C-S> :w<CR>
 nmap ; :
-set noswapfile		".swp
-set statusline +=%2*/%L%*               "total line
+set noswapfile		".swp"
+set statusline +=%2*/%L%*               "total line"
+
 
 ```
 
