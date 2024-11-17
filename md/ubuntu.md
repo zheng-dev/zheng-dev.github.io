@@ -67,9 +67,12 @@ pause
 杂项
 ----
 
-```bash
+```bat
 在win中直接以root身份运行wsl
 wsl --user root
+
+::目录链接
+mklink /j Kingsoft d:\cdisk\Kingsoft1
 ```
 vim配置
 -------
