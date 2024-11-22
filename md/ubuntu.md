@@ -99,6 +99,8 @@ set statusline +=%2*/%L%*               "total line"
 
 
 ```
+插件
+[目录显示](https://blog.csdn.net/weixin_42109053/article/details/128126722)
 
 $$
 A~n-1~*3
