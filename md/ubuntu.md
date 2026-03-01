@@ -33,9 +33,9 @@ git
 
 python
 -------
-`python -m py_compile test.py` 将py编译成pyc,`python -m compileall D:\MyPython`将目录下的所有py都编译成pyc
-打包成exe
-`pyinstaller --optimize 2 -F -i a2.ico -w --add-data="a.ico;." ..\db_read.py` upx.exe下载放到`venv\Scripts`目录即会生效，加了这2个会使9.83 MB的变小到8.03 MB
+- `python -m py_compile test.py` 将py编译成pyc,`python -m compileall D:\MyPython`将目录下的所有py都编译成pyc
+- 打包成exe
+- `pyinstaller --optimize 2 -F -i a2.ico -w --add-data="a.ico;." ..\db_read.py` upx.exe下载放到`venv\Scripts`目录即会生效，加了这2个会使9.83 MB的变小到8.03 MB
 
 ```py
 def get_resource_path(relative_path):
@@ -76,11 +76,11 @@ mklink /j Kingsoft d:\cdisk\Kingsoft1
 ```
 vim配置
 -------
-`Ctrl + [`来代替esc;`^u`向上翻页`^d`向下翻页;`7j`下跳7行,`7k`上跳7行;`w`跳到下个单词开头，`b`前跳;
-`f`再界要找的字母直接定位;`0`本行首,`$`本行尾;`gg`文件首;
-`yaw`复制本单词(yank all words),`yy`cp本行`y4j`cp下4行,可组合定范围;
-`daw`删除本单词,`dd`删除本行,可组合定范围;
-`O`向上插入一行,`o`向下插入一行
+- `Ctrl + [`来代替esc;`^u`向上翻页`^d`向下翻页;`7j`下跳7行,`7k`上跳7行;`w`跳到下个单词开头，`b`前跳;
+- `f`再界要找的字母直接定位;`0`本行首,`$`本行尾;`gg`文件首;
+- `yaw`复制本单词(yank all words),`yy`cp本行`y4j`cp下4行,可组合定范围;
+- `daw`删除本单词,`dd`删除本行,可组合定范围;
+- `O`向上插入一行,`o`向下插入一行
 
 ```bash
 set relativenumber
