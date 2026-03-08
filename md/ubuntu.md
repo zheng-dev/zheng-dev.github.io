@@ -103,6 +103,10 @@ set statusline +=%2*/%L%*               "total line"
 - [目录显示](https://blog.csdn.net/weixin_42109053/article/details/128126722)
 
 - [git下载镜像](https://mirrors.tuna.tsinghua.edu.cn/github-release/git-for-windows/git/)
+```bash
+    git config --global user.name "你的名字"
+    git config --global user.email "你的邮箱@example.com"
+```
 
 $$
 A~n-1~*3

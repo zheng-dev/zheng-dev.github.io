@@ -13,15 +13,13 @@
 `export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static`
 2. cargo太慢、改国内镜像
 ```bash
-#C:\Users\Admin\.cargo目录下的config文件加如下内容
+#C:\Users\Admin\.cargo目录下的config.toml文件加如下内容
 
 [source.crates-io]
-registry = "https://github.com/rust-lang/crates.io-index"
-replace-with = 'ustc'
-[source.ustc]
-registry = "git://mirrors.ustc.edu.cn/crates.io-index"
-[source.rustcc]
-registry = "https://code.aliyun.com/rustcc/crates.io-index"
+replace-with = 'tuna'
+
+[source.tuna]
+registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
 
 ```
 #### rust环境确认及cmd操作
