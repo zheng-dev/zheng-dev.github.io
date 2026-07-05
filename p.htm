@@ -6,57 +6,419 @@
     <title>鱼宝小听</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-
-    <!-- 自定义应用图标可用 -->
     <link rel="apple-touch-icon-precomposed" sizes="120x120" href="//favicon.ico">
-    <!-- 全屏设置 -->
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
-
-    <!-- 网站开启对 web app 程序的支持 具体表现为去除浏览器地址栏和底部导航栏 ：先保存为桌面书签，然后通过书签打开即可生效-->
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <!-- 用来定义顶部状态栏的形式默认是default为白色 black为黑色 black-translucent为灰色半透明（会占据屏幕的约20px，不同的设备可能会有差异）-->
-    <!-- 在定义了apple-mobile-web-app-capable的前提下，设置状态栏的属性值apple-mobile-web-app-status-bar-style才有效； -->
-
     <meta charset="UTF-8" />
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #e8f0fe 0%, #d4e4f7 50%, #c8dcec 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+        }
+
+        .main-title {
+            background: #2c3e50;
+            border-radius: 12px;
+            padding: 12px 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 15px rgba(44, 62, 80, 0.2);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .main-title span {
+            font-family: '楷体', 'KaiTi', serif;
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            color: #a8c8e8;
+            text-shadow: 0 0 20px rgba(168, 200, 232, 0.3);
+            animation: scrollText 12s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes scrollText {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 24px 20px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 8px 32px rgba(44, 62, 80, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .file-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #4a90d9, #357abd);
+            color: #fff;
+            border-radius: 25px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(53, 122, 189, 0.3);
+            border: none;
+            font-family: inherit;
+        }
+
+        .file-btn:hover {
+            background: linear-gradient(135deg, #357abd, #2a6cb5);
+            box-shadow: 0 6px 18px rgba(53, 122, 189, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .file-btn:active {
+            transform: scale(0.97);
+        }
+
+        .top-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .top-bar .count {
+            font-size: 13px;
+            color: #5a7a9a;
+            background: rgba(74, 144, 217, 0.1);
+            padding: 4px 12px;
+            border-radius: 12px;
+        }
+
         #nfile {
             display: none;
         }
 
         #myAudio {
-            margin: 0 auto;
+            margin: 0 auto 16px;
             width: 100%;
-            height: 50px;
+            height: 48px;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        #myAudio::-webkit-media-controls-panel {
+            background: #eaf1fb;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .btn-group button {
+            padding: 9px 18px;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            color: #fff;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-group button:active {
+            transform: scale(0.96);
+        }
+
+        .btn-set {
+            background: linear-gradient(135deg, #5b9bd5, #3a7cc2);
+        }
+
+        .btn-set:hover {
+            background: linear-gradient(135deg, #3a7cc2, #2d6aa8);
+        }
+
+        .btn-loop {
+            background: linear-gradient(135deg, #4fc3c9, #2ea8b0);
+        }
+
+        .btn-loop:hover {
+            background: linear-gradient(135deg, #2ea8b0, #238e96);
+        }
+
+        .btn-cancel {
+            background: linear-gradient(135deg, #7f8fa6, #636e82);
+        }
+
+        .btn-cancel:hover {
+            background: linear-gradient(135deg, #636e82, #4d5668);
+        }
+
+        .playlist {
+            border-top: 1px solid #dce6f0;
+            padding-top: 14px;
+            max-height: 280px;
+            overflow-y: auto;
+        }
+
+        .playlist::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .playlist::-webkit-scrollbar-thumb {
+            background: #b0c8e0;
+            border-radius: 4px;
+        }
+
+        .playlist::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .pl-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            gap: 10px;
+        }
+
+        .pl-item:hover {
+            background: rgba(74, 144, 217, 0.08);
+        }
+
+        .pl-item.active {
+            background: rgba(74, 144, 217, 0.15);
+            box-shadow: inset 3px 0 0 #4a90d9;
+        }
+
+        .pl-item .idx {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: #dce6f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #4a6a8a;
+            flex-shrink: 0;
+        }
+
+        .pl-item.active .idx {
+            background: #4a90d9;
+            color: #fff;
+        }
+
+        .pl-item .name {
+            flex: 1;
+            font-size: 14px;
+            color: #2c3e50;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .pl-item.active .name {
+            color: #2a6cb5;
+            font-weight: 600;
+        }
+
+        .pl-item .del {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: none;
+            background: transparent;
+            color: #9aafc4;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .pl-item .del:hover {
+            background: rgba(200, 80, 80, 0.15);
+            color: #c85050;
+        }
+
+        .pl-empty {
+            text-align: center;
+            color: #9aafc4;
+            font-size: 14px;
+            padding: 30px 0 10px;
+        }
+
+        .now-playing {
+            font-size: 13px;
+            color: #4a6a8a;
+            text-align: center;
+            margin-bottom: 12px;
+            min-height: 20px;
+            word-break: break-all;
+        }
+
+        @media (max-width: 420px) {
+            body {
+                padding: 16px 12px;
+            }
+
+            .card {
+                padding: 18px 14px;
+            }
+
+            .btn-group button {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
         }
     </style>
-
 </head>
 
+<body>
+    <div class="main-title">
+        <span id="name1">鱼宝小听</span>
+    </div>
+    <div class="card">
+        <div class="top-bar">
+            <button class="file-btn" onclick="open_mp3()">+ 添加音频</button>
+            <span class="count" id="countLabel">0 首</span>
+        </div>
+        <input type="file" onchange="new_file(this)" id="nfile" accept="audio/*" multiple />
 
-<body style="text-align: center;">
-    <marquee direction="left" bgcolor="#fff" scrolldelay="100">
-        <font face="楷体" color="#F37327" size="2" behavior="alternate">
-            <span style="color:#F37327;text-decoration: none" id="name1">鱼宝小听</span>
-        </font>
-    </marquee>
-    <input type="file" onchange="new_file(this)" id="nfile" />
-    <a href="javascript:void(0)" onclick="open_mp3()">选择本地音频</a>
-    <audio src="" controls autoplay="false" id="myAudio" loop="loop" ontimeupdate="a_update()"></audio>
+        <div class="now-playing" id="nowPlaying">尚未选择音频</div>
+        <audio src="" controls id="myAudio" controlsList="nodownload" loop="false" ontimeupdate="a_update()"
+            onended="a_next()"></audio>
 
-    <button onclick="setBegin()">设置句头</button>
-    <button onclick="loopBegin()">循环到此</button>
-    <button onclick="loopCancel()">取消单句</button>
+        <div class="btn-group">
+            <button onclick="setBegin()" class="btn-set">设置句头</button>
+            <button onclick="loopBegin()" class="btn-loop">循环到此</button>
+            <button onclick="loopCancel()" class="btn-cancel">取消单句</button>
+        </div>
 
-
-
+        <div class="playlist" id="playlist">
+            <div class="pl-empty">点击上方按钮添加音频文件</div>
+        </div>
+    </div>
 
     <script>
         var audio = document.getElementById('myAudio');
         audio.mBegin = 0;
         audio.mEnd = 0;
+        var playlist = [];
+        var currentIdx = -1;
 
-        //进度检查是否要单句循环
+        function renderPlaylist() {
+            var el = document.getElementById('playlist');
+            if (playlist.length === 0) {
+                el.innerHTML = '<div class="pl-empty">点击上方按钮添加音频文件</div>';
+                document.getElementById('countLabel').textContent = '0 首';
+                document.getElementById('nowPlaying').textContent = '尚未选择音频';
+                return;
+            }
+            document.getElementById('countLabel').textContent = playlist.length + ' 首';
+            var html = '';
+            for (var i = 0; i < playlist.length; i++) {
+                var item = playlist[i];
+                var activeClass = (i === currentIdx) ? ' active' : '';
+                html += '<div class="pl-item' + activeClass + '" data-idx="' + i + '">'
+                    + '<span class="idx">' + (i + 1) + '</span>'
+                    + '<span class="name">' + escapeHtml(item.name) + '</span>'
+                    + '<button class="del" data-idx="' + i + '">\u00d7</button>'
+                    + '</div>';
+            }
+            el.innerHTML = html;
+
+            if (currentIdx >= 0 && currentIdx < playlist.length) {
+                document.getElementById('nowPlaying').textContent = '\u6b63\u5728\u64ad\u653e\uff1a' + playlist[currentIdx].name;
+            }
+        }
+
+        document.getElementById('playlist').addEventListener('click', function (e) {
+            var delBtn = e.target.closest('.del');
+            if (delBtn) {
+                e.stopPropagation();
+                var idx = parseInt(delBtn.dataset.idx);
+                removeItem(idx);
+                return;
+            }
+            var itemEl = e.target.closest('.pl-item');
+            if (itemEl) {
+                var idx = parseInt(itemEl.dataset.idx);
+                playIdx(idx);
+            }
+        });
+
+        function escapeHtml(str) {
+            var div = document.createElement('div');
+            div.appendChild(document.createTextNode(str));
+            return div.innerHTML;
+        }
+
+        function removeItem(idx) {
+            playlist.splice(idx, 1);
+            if (currentIdx === idx) {
+                audio.pause();
+                audio.src = '';
+                currentIdx = -1;
+                if (playlist.length > 0) {
+                    playIdx(Math.min(idx, playlist.length - 1));
+                }
+            } else if (currentIdx > idx) {
+                currentIdx--;
+            }
+            renderPlaylist();
+        }
+
+        function playIdx(idx) {
+            if (idx < 0 || idx >= playlist.length) return;
+            currentIdx = idx;
+            var item = playlist[idx];
+            audio.src = item.url;
+            audio.mBegin = 0;
+            audio.mEnd = 0;
+            audio.play().catch(function (e) {
+                // iOS may require user gesture
+            });
+            renderPlaylist();
+        }
+
+        function a_next() {
+            if (playlist.length === 0) return;
+            var next = currentIdx + 1;
+            if (next >= playlist.length) next = 0;
+            playIdx(next);
+        }
+
         function a_update() {
             if (audio.mEnd > 0) {
                 if ((audio.currentTime - audio.mEnd) > 0.05) {
@@ -66,13 +428,13 @@
                 }
             }
         }
-        //取消单句
+
         function loopCancel() {
             audio.pause();
             audio.mEnd = 0;
             audio.mBegin = 0;
         }
-        //开始单句循环
+
         function loopBegin() {
             if (audio.mBegin > 0 && audio.mEnd == 0) {
                 if (audio.mBegin >= audio.currentTime) {
@@ -84,12 +446,12 @@
                 setTimeout(function () { audio.play(); }, 1200);
             }
         }
-        //设置单句并没有
+
         function setBegin() {
             audio.pause();
             audio.mBegin = audio.currentTime;
             audio.mEnd = 0;
-            alert("句头设置成功")
+            alert("句头设置成功");
             audio.play();
         }
 
@@ -97,18 +459,27 @@
             document.getElementById('nfile').click();
         }
 
-        function new_file(files) {
-            // console.log(files.files[0])
-            let fReader = new FileReader();
-            fReader.readAsDataURL(files.files[0]);
-            document.getElementById('name1').innerHTML = "鱼宝小听:" + files.files[0].name;
-            fReader.onload = function (e) {
-                let content = e.target.result;
-                audio.src = content;
+        function new_file(input) {
+            var files = input.files;
+            if (!files || files.length === 0) return;
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                if (!file.type.startsWith('audio/')) continue;
+                var url = URL.createObjectURL(file);
+                playlist.push({
+                    name: file.name,
+                    url: url,
+                    file: file
+                });
+                if (playlist.length === 1) {
+                    playIdx(0);
+                }
             }
+            // reset so same file(s) can be reselected
+            input.value = '';
+            renderPlaylist();
         }
     </script>
 </body>
 
-
-<html>
+</html>

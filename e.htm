@@ -6,50 +6,279 @@
     <title>english</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-
-    <!-- 自定义应用图标可用 -->
     <link rel="apple-touch-icon-precomposed" sizes="120x120" href="//favicon.ico">
-    <!-- 全屏设置 -->
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
-
-    <!-- 网站开启对 web app 程序的支持 具体表现为去除浏览器地址栏和底部导航栏 ：先保存为桌面书签，然后通过书签打开即可生效-->
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <!-- 用来定义顶部状态栏的形式默认是default为白色 black为黑色 black-translucent为灰色半透明（会占据屏幕的约20px，不同的设备可能会有差异）-->
-    <!-- 在定义了apple-mobile-web-app-capable的前提下，设置状态栏的属性值apple-mobile-web-app-status-bar-style才有效； -->
-
     <meta charset="UTF-8" />
+
     <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            text-align: center;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #FFF5E6 0%, #FFE8D0 50%, #FFDAB5 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            color: #5D4037;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 248, 240, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px 25px;
+            box-shadow: 0 8px 32px rgba(200, 120, 60, 0.18), 0 2px 8px rgba(200, 120, 60, 0.08);
+            border: 1px solid rgba(255, 200, 150, 0.3);
+        }
+
+        h1 {
+            font-size: 26px;
+            font-weight: 600;
+            color: #E8744A;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #E8744A, #F5A623);
+            margin: 8px auto 0;
+            border-radius: 2px;
+        }
+
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        select {
+            padding: 8px 14px;
+            border: 2px solid #F5C6AA;
+            border-radius: 10px;
+            background: #FFFBF5;
+            font-size: 14px;
+            color: #5D4037;
+            outline: none;
+            cursor: pointer;
+            transition: border-color 0.2s;
+            max-width: 200px;
+        }
+
+        select:focus {
+            border-color: #E8744A;
+        }
+
+        .btn {
+            padding: 8px 18px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #fff;
+            background: linear-gradient(135deg, #E8744A, #F5A623);
+            box-shadow: 0 3px 12px rgba(232, 116, 74, 0.25);
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 18px rgba(232, 116, 74, 0.35);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-save {
+            background: linear-gradient(135deg, #F5A623, #E8A040);
+            box-shadow: 0 3px 12px rgba(245, 166, 35, 0.25);
+        }
+
+        .btn-save:hover {
+            box-shadow: 0 5px 18px rgba(245, 166, 35, 0.35);
+        }
+
+        .btn-lesson {
+            background: linear-gradient(135deg, #D4876A, #E8A87C);
+            box-shadow: 0 3px 12px rgba(212, 135, 106, 0.2);
+            font-size: 13px;
+            padding: 7px 14px;
+        }
+
+        .btn-lesson:hover {
+            box-shadow: 0 5px 18px rgba(212, 135, 106, 0.3);
+        }
+
+        .btn-del {
+            background: linear-gradient(135deg, #E8A0A0, #D48787);
+            box-shadow: 0 3px 12px rgba(212, 135, 135, 0.2);
+            padding: 4px 12px;
+            font-size: 12px;
+        }
+
+        .btn-del:hover {
+            box-shadow: 0 5px 18px rgba(212, 135, 135, 0.3);
+        }
+
+        .btn-read {
+            background: linear-gradient(135deg, #A8D8A0, #7CC4A0);
+            box-shadow: 0 3px 12px rgba(124, 196, 160, 0.2);
+            padding: 4px 12px;
+            font-size: 12px;
+        }
+
+        .btn-read:hover {
+            box-shadow: 0 5px 18px rgba(124, 196, 160, 0.3);
+        }
+
+        .lesson-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #F5C6AA, transparent);
+            margin: 18px 0;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 15px;
+            font-weight: 500;
+            color: #8D6E63;
+            margin-bottom: 6px;
+        }
+
+        textarea {
+            width: 100%;
+            max-width: 400px;
+            height: 60px;
+            padding: 10px 14px;
+            border: 2px solid #F5C6AA;
+            border-radius: 12px;
+            background: #FFFBF5;
+            font-size: 15px;
+            color: #5D4037;
+            outline: none;
+            resize: vertical;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        textarea:focus {
+            border-color: #E8744A;
+            box-shadow: 0 0 0 3px rgba(232, 116, 74, 0.12);
+        }
+
+        .list-wrap {
+            max-width: 440px;
+            margin: 0 auto;
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .list-wrap::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .list-wrap::-webkit-scrollbar-track {
+            background: #FFF0E0;
+            border-radius: 3px;
+        }
+
+        .list-wrap::-webkit-scrollbar-thumb {
+            background: #F5C6AA;
+            border-radius: 3px;
+        }
+
+        #text_list {
+            list-style: none;
+            padding: 0;
+        }
+
         #text_list li {
             text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            margin-bottom: 6px;
+            background: #FFFBF5;
+            border-radius: 10px;
+            border: 1px solid #F5DCC6;
+            transition: all 0.2s;
+        }
+
+        #text_list li:hover {
+            background: #FFF5E8;
+            border-color: #F5C6AA;
+            transform: translateX(3px);
+        }
+
+        #text_list li span {
+            flex: 1;
+            cursor: pointer;
+            font-size: 15px;
+            color: #5D4037;
+            padding: 2px 0;
+            user-select: none;
+        }
+
+        #text_list li span:hover {
+            color: #E8744A;
+        }
+
+        #text_list li .btn-group {
+            display: flex;
+            gap: 5px;
+            flex-shrink: 0;
         }
     </style>
 
     <script type="text/javascript">
         let utterance = new SpeechSynthesisUtterance();
-        window.speechSynthesis.getVoices();//触发语言包异步加载
-        //语速，取值范围(0.1 - 10) 默认值：1
-        utterance.rate = 0.8;
-        //音调，取值范围(0 - 2) 默认值：1
-        //utterance.pitch = 0;
+        window.speechSynthesis.getVoices();
 
-        //音量，取值范围(0 - 1) 默认值：0.5
+        utterance.rate = 0.8;
         utterance.volume = 1;
 
-        //[108];//Microsoft Sonia Online (Natural) - English (United Kingdom)
-        //[110];//Microsoft Aria Online (Natural) - English (United States)
-        //朗读
         let content;
+
         function f_read(voiceId) {
-            window.speechSynthesis.cancel();//先尝试关闭正在播放的
+            window.speechSynthesis.cancel();
             utterance.text = content.value;
             window.speechSynthesis.speak(utterance);
         }
 
-
         let tl;
         let open_txt = {};
-        //初始列表
+
         function f_init() {
             content = document.getElementById('t');
             tl = document.getElementById('text_list');
@@ -63,121 +292,127 @@
                 }
             }
         }
-        //生成一行句子
+
         function f_insert(i, word) {
             tl.innerHTML += "<li id='l" + i + "'>" +
-                "<span onclick='set_now(this.innerText);'>" + word + "</span> "
-                + "<button onclick='del(" + i + ')\'>删除</button> <button onclick="txt_read(' + i + ')">阅读</button></li>'
+                "<span onclick='set_now(this.innerText);'>" + word + "</span> " +
+                "<span class='btn-group'>" +
+                "<button class='btn btn-del' onclick='del(" + i + ")'>删除</button> " +
+                "<button class='btn btn-read' onclick='txt_read(" + i + ")'>阅读</button></span></li>"
         }
-        //阅读本行
+
         function txt_read(m) {
-            $('#l' + m).find("span").click();
+            $('#l' + m).find("span").first().click();
             f_read(2);
         }
-        //选中内容
+
         function on_click(o) {
             o.select()
         }
     </script>
 </head>
 
+<body onload="f_init();">
+    <div class="container">
+        <h1>英语学习</h1>
 
-<body style="text-align: center;" onload="f_init();">
-    <select id="speaker" onchange="ch_speeker()">
-    </select>
-    <button onclick="f_read(1)" style="margin-right:29px;">开始朗读</button>
-    <button onclick="f_save()">本地保存</button>
+        <div class="toolbar">
+            <select id="speaker" onchange="ch_speeker()"></select>
+            <button class="btn" onclick="f_read(1)">开始朗读</button>
+            <button class="btn btn-save" onclick="f_save()">本地保存</button>
+        </div>
 
-    <br>
-    <button onclick="form_txt('/res/lession1aword.txt');">1年级上单词</button>
-    <button onclick="form_txt('/res/lession1b.txt');">1年级下</button>
-    <button onclick="form_txt('/res/lession1bword.txt');">1年级下单词</button>
-    <button onclick="form_txt('/res/read1b.txt');">群文阅读</button>
-    <hr />
-    <label for="t">英语内容</label><textarea id="t" style="width: 400px;height: 60px;"
-        onclick="on_click(this)">look at my eye,Hi! I'm Amy,wow</textarea>
-    <div style="width: 400px;height: 60px;margin: 0 auto;">
-        <ul id="text_list">
-        </ul>
+        <div class="lesson-group">
+            <button class="btn btn-lesson" onclick="form_txt('/res/lession1aword.txt');">1年级上单词</button>
+            <button class="btn btn-lesson" onclick="form_txt('/res/lession1b.txt');">1年级下</button>
+            <button class="btn btn-lesson" onclick="form_txt('/res/lession1bword.txt');">1年级下单词</button>
+            <button class="btn btn-lesson" onclick="form_txt('/res/read1b.txt');">群文阅读</button>
+        </div>
+
+        <hr />
+
+        <div class="input-group">
+            <label for="t">英语内容</label>
+            <textarea id="t" onclick="on_click(this)">look at my eye,Hi! I'm Amy,wow</textarea>
+        </div>
+
+        <div class="list-wrap">
+            <ul id="text_list"></ul>
+        </div>
+
+        <div id="dbg"></div>
+        <div id="text"></div>
     </div>
-    <div id="dbg"></div>
-    <div id="text"></div>
-</body>
 
-<script src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
-<script type="text/javascript">
-    //加载完成
-    $(function () {
-        let s = $("#speaker");
-        let si = localStorage.getItem('speek_index');
-        let voices1 = window.speechSynthesis.getVoices(); // 获取语言包
-        for (let index = 0; index < voices1.length; index++) {
-            const element = voices1[index];
+    <script src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            let s = $("#speaker");
+            let si = localStorage.getItem('speek_index');
+            let voices1 = window.speechSynthesis.getVoices();
+            for (let index = 0; index < voices1.length; index++) {
+                const element = voices1[index];
+                let default1 = '';
+                if (si == index) default1 = 'selected';
+                if (element.lang.indexOf("en-GB") >= 0)
+                    s.append("<option value='" + index + "'" + default1 + ">英音=" + element.name + "</option>");
+                else if (element.lang.indexOf("en-US") >= 0)
+                    s.append("<option value='" + index + "'" + default1 + ">美音=" + element.name + "</option>");
+            }
+        });
 
-            let default1 = '';
-            if (si == index) default1 = 'selected';
-
-            if (element.lang.indexOf("en-GB") >= 0)
-                s.append("<option value='" + index + "'" + default1 + ">英音=" + element.name + "</option>");
-            else if (element.lang.indexOf("en-US") >= 0)
-                s.append("<option value='" + index + "'" + default1 + ">美音=" + element.name + "</option>");
-
-        }
-    });
-    //换语音
-    function ch_speeker() {
-        let i = $("#speaker").val();
-        let voices1 = window.speechSynthesis.getVoices(); // 获取语言包
-        utterance.voice = voices1[i];
-        localStorage.setItem('speek_index', i);
-    }
-    //读文件
-    function form_txt(txt) {
-        if (open_txt[txt] != 1) {
-            open_txt[txt] = 1;//不重复加
-            $.ajax({
-                url: txt, success: function (result) {
-                    let words = result.split(/[(\r\n)\r\n]+/); // 根据换行或者回车进行
-                    let index = Number(localStorage.getItem('ls_index'));
-
-                    words.forEach(function (word) {
-                        index = index + 1;
-                        f_insert(index, word);
-                    });
-                }
-            });
+        function ch_speeker() {
+            let i = $("#speaker").val();
+            let voices1 = window.speechSynthesis.getVoices();
+            utterance.voice = voices1[i];
+            localStorage.setItem('speek_index', i);
         }
 
-    }
-    //保存
-    function f_save() {
-        //内容
-        console.log(localStorage.key(2));
-        let val = document.getElementById('t').value;
-        if (val !== '') {
-            let index = localStorage.getItem('ls_index');
-            if (index == null) {
-                localStorage.setItem('1', val);
-                localStorage.setItem('ls_index', '1');
-                f_insert(1, val);
-            } else {
-                let newIndex = (Number(index) + 1).toString();
-                localStorage.setItem(newIndex, val);
-                localStorage.setItem('ls_index', newIndex);
-                f_insert(newIndex, val);
+        function form_txt(txt) {
+            if (open_txt[txt] != 1) {
+                open_txt[txt] = 1;
+                $.ajax({
+                    url: txt,
+                    success: function (result) {
+                        let words = result.split(/[(\r\n)\r\n]+/);
+                        let index = Number(localStorage.getItem('ls_index'));
+                        words.forEach(function (word) {
+                            index = index + 1;
+                            f_insert(index, word);
+                        });
+                    }
+                });
             }
         }
-    }
-    //del
-    function del(index) {
-        let tl = document.getElementById('text_list');
-        tl.removeChild(document.getElementById("l" + index));
-        localStorage.removeItem(index.toString());
-    }
-    //设置当前
-    function set_now(val) {
-        document.getElementById('t').value = val;
-    }
-</script>
 
-<html>
+        function f_save() {
+            console.log(localStorage.key(2));
+            let val = document.getElementById('t').value;
+            if (val !== '') {
+                let index = localStorage.getItem('ls_index');
+                if (index == null) {
+                    localStorage.setItem('1', val);
+                    localStorage.setItem('ls_index', '1');
+                    f_insert(1, val);
+                } else {
+                    let newIndex = (Number(index) + 1).toString();
+                    localStorage.setItem(newIndex, val);
+                    localStorage.setItem('ls_index', newIndex);
+                    f_insert(newIndex, val);
+                }
+            }
+        }
+
+        function del(index) {
+            let tl = document.getElementById('text_list');
+            tl.removeChild(document.getElementById("l" + index));
+            localStorage.removeItem(index.toString());
+        }
+
+        function set_now(val) {
+            document.getElementById('t').value = val;
+        }
+    </script>
+</body>
+
+</html>
