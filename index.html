@@ -29,10 +29,6 @@
 <body>
   <div id="app">Please wait...</div>
   <script>
-    (function(){
-      var r = sessionStorage.redirect;
-      if (r) { sessionStorage.removeItem('redirect'); history.replaceState(null, '', r); }
-    })();
     window.$docsify = {
       el: '#app',
       basePath: '/md/',

@@ -31,8 +31,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
+      - name: Generate SPA route directories
+        run: |
+          for f in md/*.md; do
+            name=$(basename "$f" .md)
+            case "$name" in
+              _navbar|_sidebar|README) continue ;;
+            esac
+            mkdir -p "$name"
+            cp index.html "$name/"
+          done
+      
       - name: Setup Pages
-        uses: actions/configure-pages@v5  # 升级到 v5
+        uses: actions/configure-pages@v5
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3  # 注意：这个目前最新就是 v3
