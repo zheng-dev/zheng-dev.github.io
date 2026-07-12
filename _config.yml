@@ -1,0 +1,14 @@
+title: 春之韵
+lang: zh_CN
+description: 个人笔记站点
+markdown: kramdown
+permalink: pretty
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - README.md
+  - md/
+  - res/misc.md

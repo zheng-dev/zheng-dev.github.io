@@ -2,3 +2,8 @@ md/team.md
 md/a.md
 .office.md
 .db
+_site/
+.jekyll-cache/
+Gemfile.lock
+.vendor/
+vendor/

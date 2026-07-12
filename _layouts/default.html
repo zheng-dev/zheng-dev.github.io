@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <link rel="stylesheet" href="/res/css/vue.css">
+  <style>
+    body { padding-top: 0; }
+    .app-nav {
+      margin: 10px 30px 0 0;
+      position: absolute;
+      right: 0;
+      text-align: right;
+      z-index: 10;
+    }
+    .app-nav ul {
+      display: inline-block;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .app-nav li {
+      display: inline-block;
+      list-style: none;
+      margin: 0 0.5rem;
+    }
+    .app-nav a {
+      color: #34495e;
+      font-size: 16px;
+      text-decoration: none;
+      transition: color .3s;
+      padding: 5px 0;
+    }
+    .app-nav a:hover,
+    .app-nav a.active {
+      color: #42b983;
+      border-bottom: 2px solid #42b983;
+    }
+    .content {
+      max-width: 95%;
+      margin: 0 auto;
+      padding: 30px 5px 4px 5px;
+    }
+    .content h1:first-of-type {
+      margin-top: 0;
+    }
+    .mermaid {
+      text-align: center;
+      margin: 1em 0;
+    }
+    @media print {
+      .app-nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="app-nav">
+    <ul>
+      {% for item in site.data.navigation %}
+        {% if item.children %}
+          <li>{{ item.title }}
+            <ul>
+              {% for child in item.children %}
+                <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+              {% endfor %}
+            </ul>
+          </li>
+        {% else %}
+          <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </nav>
+
+  <section class="content markdown-section">
+    {{ content }}
+  </section>
+
+  <script src="/res/js/mermaid.min.js"></script>
+  <script>
+    (function() {
+      function renderMermaid() {
+        if (typeof mermaid === 'undefined') return;
+        mermaid.initialize({ startOnLoad: false });
+        document.querySelectorAll('code.language-mermaid').forEach(function(el) {
+          var pre = el.parentElement;
+          if (pre && pre.tagName === 'PRE') {
+            var div = document.createElement('div');
+            div.className = 'mermaid';
+            div.textContent = el.textContent;
+            pre.parentNode.replaceChild(div, pre);
+          }
+        });
+        if (document.querySelector('.mermaid')) {
+          mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+        }
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', renderMermaid);
+      } else {
+        renderMermaid();
+      }
+    })();
+  </script>
+</body>
+</html>
