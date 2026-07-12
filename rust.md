@@ -28,7 +28,9 @@ title: rust笔记
     registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
 
     ```
+
 #### rust环境确认及cmd操作
+
 ```bash
 #可以编译成哪些目标文件
 rustup target list
