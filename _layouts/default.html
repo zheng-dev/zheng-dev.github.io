@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/res/css/vue.css">
   <style>
     body .app-nav { display: block !important; }
+    .app-nav li.open ul { display: block; }
     .content {
       max-width: 95%;
       margin: 0 auto;
@@ -47,6 +48,23 @@
   <script src="/res/js/mermaid.min.js"></script>
   <script>
     (function() {
+      document.querySelectorAll('.app-nav li').forEach(function(li) {
+        li.addEventListener('click', function(e) {
+          if (e.target.tagName === 'A') return;
+          this.classList.toggle('open');
+          document.querySelectorAll('.app-nav li.open').forEach(function(other) {
+            if (other !== li) other.classList.remove('open');
+          });
+        });
+      });
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('.app-nav')) {
+          document.querySelectorAll('.app-nav li.open').forEach(function(li) {
+            li.classList.remove('open');
+          });
+        }
+      });
+
       function renderMermaid() {
         if (typeof mermaid === 'undefined') return;
         mermaid.initialize({ startOnLoad: false });
