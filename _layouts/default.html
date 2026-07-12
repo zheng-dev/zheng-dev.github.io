@@ -75,36 +75,15 @@
         document.querySelectorAll('code.language-mermaid').forEach(function(el) {
           var pre = el.parentElement;
           if (!pre || pre.tagName !== 'PRE') return;
-          var code = el.textContent;
-          console.log('mermaid code:', code);
-          var id = 'mermaid-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-          var container = document.createElement('div');
-          container.className = 'mermaid';
-          container.id = id;
-          pre.parentNode.replaceChild(container, pre);
-          try {
-            var result = mermaid.mermaidAPI.render(id, code, function(svg, bindFn) {
-              console.log('callback called, svg type:', typeof svg, 'svg length:', svg ? svg.length : 0);
-              if (svg) {
-                container.innerHTML = svg;
-                console.log('innerHTML set, length:', container.innerHTML.length);
-              }
-            });
-            console.log('render returned:', typeof result, result);
-            if (result && typeof result.then === 'function') {
-              result.then(function(svg) {
-                console.log('render promise resolved, svg:', typeof svg, svg ? svg.length : 0);
-                if (svg && typeof svg === 'string') container.innerHTML = svg;
-              }).catch(function(err) {
-                console.error('render promise rejected:', err);
-                container.textContent = 'mermaid promise error: ' + err.message;
-              });
-            }
-          } catch(e) {
-            console.error('mermaid render sync error:', e);
-            container.textContent = 'mermaid sync error: ' + e.message;
-          }
+          var div = document.createElement('div');
+          div.className = 'mermaid';
+          div.textContent = el.textContent;
+          pre.parentNode.replaceChild(div, pre);
         });
+        var mermaidDivs = document.querySelectorAll('.mermaid');
+        if (mermaidDivs.length) {
+          mermaid.init(undefined, mermaidDivs);
+        }
       }
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', renderMermaid);
