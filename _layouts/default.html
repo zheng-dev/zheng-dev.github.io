@@ -83,12 +83,26 @@
           container.id = id;
           pre.parentNode.replaceChild(container, pre);
           try {
-            mermaid.mermaidAPI.render(id, code, function(svg) {
-              container.innerHTML = svg;
+            var result = mermaid.mermaidAPI.render(id, code, function(svg, bindFn) {
+              console.log('callback called, svg type:', typeof svg, 'svg length:', svg ? svg.length : 0);
+              if (svg) {
+                container.innerHTML = svg;
+                console.log('innerHTML set, length:', container.innerHTML.length);
+              }
             });
+            console.log('render returned:', typeof result, result);
+            if (result && typeof result.then === 'function') {
+              result.then(function(svg) {
+                console.log('render promise resolved, svg:', typeof svg, svg ? svg.length : 0);
+                if (svg && typeof svg === 'string') container.innerHTML = svg;
+              }).catch(function(err) {
+                console.error('render promise rejected:', err);
+                container.textContent = 'mermaid promise error: ' + err.message;
+              });
+            }
           } catch(e) {
-            console.error('mermaid render error:', e);
-            container.textContent = 'mermaid error: ' + e.message;
+            console.error('mermaid render sync error:', e);
+            container.textContent = 'mermaid sync error: ' + e.message;
           }
         });
       }
