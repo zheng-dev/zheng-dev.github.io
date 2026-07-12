@@ -46,17 +46,21 @@
       plugins: [
         function (hook, vm) {
           var mermaidLoaded = false;
+          function renderMermaid() {
+            if (typeof mermaid === 'undefined') return;
+            mermaid.initialize({ startOnLoad: false });
+            mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+          }
           hook.doneEach(function () {
             if (!document.querySelector('.mermaid')) return;
             if (mermaidLoaded) {
-              mermaid.init(undefined, '.mermaid');
+              renderMermaid();
             } else {
               var s = document.createElement('script');
               s.src = '/res/js/mermaid.min.js';
               s.onload = function () {
                 mermaidLoaded = true;
-                mermaid.initialize({ startOnLoad: false });
-                mermaid.init(undefined, '.mermaid');
+                renderMermaid();
               };
               document.body.appendChild(s);
             }

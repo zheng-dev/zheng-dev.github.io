@@ -4,6 +4,7 @@
     * [战斗时序](/fight.md "")
     * [ubuntu备忘](/ubuntu.md "")
     * [erl相关](/erlmisc.md "")
+    * [小工具](/webtool.md "web小工具")
 * [rust](/rust.md "rust笔记")
 * [介绍](/ "home")
 * 👋 Hi,幸会

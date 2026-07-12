@@ -9,7 +9,7 @@
 <body>
 <script>
 fetch('/index.html').then(function(r){return r.text()}).then(function(html){
-  document.open(); document.write(html); document.close()
+  document.write(html)
 })
 </script>
 </body>
