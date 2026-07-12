@@ -45,11 +45,21 @@
       repo: "https://github.com/zheng-dev/my_all_test0",
       plugins: [
         function (hook, vm) {
-          hook.ready(function () {
-            mermaid.initialize({ startOnLoad: false });
-          });
+          var mermaidLoaded = false;
           hook.doneEach(function () {
-            mermaid.init(undefined, '.mermaid');
+            if (!document.querySelector('.mermaid')) return;
+            if (mermaidLoaded) {
+              mermaid.init(undefined, '.mermaid');
+            } else {
+              var s = document.createElement('script');
+              s.src = '/res/js/mermaid.min.js';
+              s.onload = function () {
+                mermaidLoaded = true;
+                mermaid.initialize({ startOnLoad: false });
+                mermaid.init(undefined, '.mermaid');
+              };
+              document.body.appendChild(s);
+            }
           });
         }
       ],
@@ -84,7 +94,6 @@
 
   <link rel="stylesheet" href="/res/css/vue.css" />
   <script src="/res/js/docsify.js"></script>
-  <script src="/res/js/mermaid.min.js"></script>
   <script src="/res/js/prism-bash.js"></script>
   <script src="/res/js/prism-javascript.js"></script>
   <script src="/res/js/prism-erlang.js"></script>
