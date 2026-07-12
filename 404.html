@@ -1,16 +1,11 @@
-<!-- 404.html - loads index.html content -->
+<!-- 404.html - redirect to SPA -->
 <!DOCTYPE html>
 <html lang="zh_CN">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>春之韵</title>
-</head>
+<head><meta charset="UTF-8"><title>春之韵</title></head>
 <body>
 <script>
-fetch('/index.html').then(function(r){return r.text()}).then(function(html){
-  document.write(html)
-})
+sessionStorage.redirect = location.pathname + location.search;
+location.replace('/')
 </script>
 </body>
 </html>
