@@ -74,17 +74,23 @@
       function renderMermaid() {
         document.querySelectorAll('code.language-mermaid').forEach(function(el) {
           var pre = el.parentElement;
-          if (pre && pre.tagName === 'PRE') {
-            var div = document.createElement('div');
-            div.className = 'mermaid';
-            div.textContent = el.textContent;
-            pre.parentNode.replaceChild(div, pre);
+          if (!pre || pre.tagName !== 'PRE') return;
+          var code = el.textContent;
+          console.log('mermaid code:', code);
+          var id = 'mermaid-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+          var container = document.createElement('div');
+          container.className = 'mermaid';
+          container.id = id;
+          pre.parentNode.replaceChild(container, pre);
+          try {
+            mermaid.mermaidAPI.render(id, code, function(svg) {
+              container.innerHTML = svg;
+            });
+          } catch(e) {
+            console.error('mermaid render error:', e);
+            container.textContent = 'mermaid error: ' + e.message;
           }
         });
-        var mermaidDivs = document.querySelectorAll('.mermaid');
-        if (mermaidDivs.length) {
-          mermaid.init(undefined, mermaidDivs);
-        }
       }
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', renderMermaid);
