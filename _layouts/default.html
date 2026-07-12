@@ -50,6 +50,9 @@
 
   <script src="/res/js/mermaid.min.js"></script>
   <script>
+    mermaid.initialize({ startOnLoad: false });
+  </script>
+  <script>
     (function() {
       document.querySelectorAll('.app-nav li').forEach(function(li) {
         li.addEventListener('click', function(e) {
@@ -69,7 +72,6 @@
       });
 
       function renderMermaid() {
-        if (typeof mermaid === 'undefined') return;
         document.querySelectorAll('code.language-mermaid').forEach(function(el) {
           var pre = el.parentElement;
           if (pre && pre.tagName === 'PRE') {
@@ -79,9 +81,9 @@
             pre.parentNode.replaceChild(div, pre);
           }
         });
-        if (document.querySelector('.mermaid')) {
-          mermaid.initialize({ startOnLoad: false });
-          mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        var mermaidDivs = document.querySelectorAll('.mermaid');
+        if (mermaidDivs.length) {
+          mermaid.init(undefined, mermaidDivs);
         }
       }
       if (document.readyState === 'loading') {
