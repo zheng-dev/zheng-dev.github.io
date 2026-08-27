@@ -113,6 +113,16 @@ set statusline +=%2*/%L%*               "total line"
     git config --global user.email "你的邮箱@example.com"
 ```
 
+npm 发布
+---
+```shell
+npm adduser --registry=https://registry.npmjs.org
+npm login --registry=https://registry.npmjs.org
+npm whoami --registry=https://registry.npmjs.org
+//配置accessToken
+npm config set "//registry.npmjs.org/:_authToken" 'npm_Token值NwE' --location=user
+```
+
 $$
 A~n-1~*3
 $$
