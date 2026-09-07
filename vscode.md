@@ -54,3 +54,38 @@ settings.json
     "git.openRepositoryInParentFolders": "never"
 }
 ```
+
+tasks.json
+---
+```json
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "cc",
+            "type": "shell",
+            "command": [
+                "cd web;npm run build;cd .. ;",
+                "powershell -NoProfile -ExecutionPolicy Bypass -File .vscode/increment-yk-version.ps1 ;",
+                "$version = (Get-Content -Raw npm/package.json | ConvertFrom-Json).version; go build -trimpath -ldflags ('-s -X main.version=' + $version) -o cc-connect.exe ./cmd/cc-connect/ ;",
+                "xcopy cc-connect.exe C:\\Users\\Administrator\\AppData\\Roaming\\npm\\node_modules\\yk-connect\\bin\\yk-connect.exe /Y /F;",
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "cc-publish",
+            "type": "shell",
+            "dependsOn": "cc",
+            "dependsOrder": "sequence",
+            "command": [
+                "upx --best cc-connect.exe ;",
+                "xcopy cc-connect.exe .\\npm\\bin\\yk-connect.exe /Y /F;",
+                "npm publish .\\npm\\"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}
+```
